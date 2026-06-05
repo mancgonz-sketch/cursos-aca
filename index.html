@@ -1,0 +1,1738 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cursos ACA GDN · Motivación Trascendente</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --az:#002F6C;--az2:#004DB3;--cel:#0090D4;
+  --do:#C49A2A;--do2:#F0C060;
+  --ve:#1A7F5A;--ve2:#E8F5EF;
+  --cr:#F8F5EF;--bl:#fff;--gr:#3D3D3D;--gr2:#717171;
+  --azlt:#D6E4F5;--dolt:#FEF3D0;--rlt:#FDECEA;--velt:#E8F5EF;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--cr);color:var(--gr);}
+
+.screen{display:none;min-height:100vh;}
+.screen.active{display:flex;flex-direction:column;}
+#s-login{align-items:center;justify-content:center;background:linear-gradient(150deg,var(--az),#001030);min-height:100vh;}
+#s-fac{align-items:center;justify-content:center;background:linear-gradient(150deg,#1A3A20,var(--az));min-height:100vh;}
+#s-course{flex-direction:row;}
+#s-dash{flex-direction:column;background:var(--cr);}
+
+/* LOGIN */
+.card{background:#fff;border-radius:20px;padding:40px 36px;width:100%;max-width:400px;box-shadow:0 20px 60px rgba(0,0,0,.3);}
+.card-logo{text-align:center;margin-bottom:24px;}
+.card-logo .org{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--cel);margin-bottom:4px;}
+.card-logo h1{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:700;color:var(--az);line-height:1.2;}
+.card-logo p{font-size:.8rem;color:var(--gr2);margin-top:4px;}
+.fg{margin-bottom:14px;}
+.fg label{display:block;font-size:.8rem;font-weight:600;color:var(--az);margin-bottom:5px;}
+.fi{width:100%;padding:11px 13px;border:2px solid #e0e0e0;border-radius:10px;font-family:'Outfit',sans-serif;font-size:.9rem;color:var(--gr);transition:border-color .2s;}
+.fi:focus{outline:none;border-color:var(--cel);}
+.prev{display:none;background:#EBF5FF;border-radius:10px;padding:12px 14px;margin-bottom:12px;border-left:3px solid var(--cel);}
+.prev .pl{font-size:.68rem;color:var(--cel);font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-bottom:3px;}
+.prev .pn{font-size:.9rem;font-weight:600;color:var(--az);}
+.prev .ps{font-size:.76rem;color:var(--gr2);margin-top:1px;}
+.nf{display:none;background:var(--rlt);border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:.8rem;color:#c62828;border-left:3px solid #c62828;}
+.btn{width:100%;padding:12px;border:none;border-radius:10px;font-family:'Outfit',sans-serif;font-size:.92rem;font-weight:600;cursor:pointer;}
+.btn-az{background:var(--az);color:#fff;}
+.btn-az:hover{background:var(--az2);}
+.btn-ve{background:var(--ve);color:#fff;}
+.btn-ve:hover{background:#156B4A;}
+.btn-out{background:transparent;border:2px solid #e0e0e0;color:var(--gr2);}
+.btn-out:hover{border-color:var(--do);color:var(--do);}
+.div{text-align:center;margin:12px 0;font-size:.78rem;color:var(--gr2);}
+.err{background:var(--rlt);color:#c62828;padding:9px 12px;border-radius:8px;font-size:.8rem;margin-top:10px;display:none;}
+
+/* SIDEBAR */
+.sb{width:260px;min-height:100vh;background:var(--az);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;overflow-y:auto;z-index:50;transition:transform .3s;}
+.sb-top{padding:18px 16px 12px;border-bottom:1px solid rgba(255,255,255,.08);}
+.urow{display:flex;align-items:center;gap:9px;margin-bottom:10px;}
+.uav{width:34px;height:34px;border-radius:50%;background:var(--do);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;color:var(--az);flex-shrink:0;}
+.un{font-size:.82rem;font-weight:600;color:#fff;line-height:1.2;}
+.ud{font-size:.68rem;color:rgba(255,255,255,.5);}
+.ug{font-size:.68rem;color:var(--do2);}
+.pbox{background:rgba(255,255,255,.06);border-radius:7px;padding:8px 10px;}
+.plbl{font-size:.63rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;}
+.pbar{height:4px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden;}
+.pbar-f{height:100%;background:var(--do);border-radius:3px;transition:width .4s;}
+.ppct{font-size:.68rem;color:var(--do2);margin-top:3px;}
+.snav{padding:8px 0;flex:1;}
+.ni{display:flex;align-items:center;gap:9px;padding:9px 16px;cursor:pointer;border-left:3px solid transparent;transition:all .2s;text-decoration:none;}
+.ni:hover{background:rgba(255,255,255,.05);border-left-color:rgba(255,255,255,.2);}
+.ni.active{background:rgba(255,255,255,.1);border-left-color:var(--do);}
+.ni.done .nn{background:var(--do);color:var(--az);}
+.nn{width:25px;height:25px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:rgba(255,255,255,.6);flex-shrink:0;}
+.ni.active .nn{background:var(--do);color:var(--az);}
+.nt{font-size:.74rem;color:rgba(255,255,255,.55);line-height:1.25;}
+.nt strong{display:block;color:#fff;font-size:.78rem;}
+.sb-foot{padding:10px 16px;border-top:1px solid rgba(255,255,255,.08);font-size:.63rem;color:rgba(255,255,255,.25);}
+
+/* MAIN */
+.mn{margin-left:260px;flex:1;min-height:100vh;}
+.tbar{height:3px;background:rgba(0,0,0,.05);position:sticky;top:0;z-index:40;}
+.tbar-f{height:100%;background:var(--do);transition:width .4s;}
+
+/* PANEL */
+.panel{display:none;}
+.panel.active{display:block;animation:fi .3s ease;}
+@keyframes fi{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+/* MODULE HEADER */
+.mh{padding:44px 44px 28px;position:relative;overflow:hidden;}
+.mh::after{content:'';position:absolute;right:-30px;top:-30px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.04);}
+.mh.c0{background:linear-gradient(135deg,#001A40,var(--az));}
+.mh.c1{background:linear-gradient(135deg,#003070,#00406A);}
+.mh.c2{background:linear-gradient(135deg,#002850,#003D5A);}
+.mh.c3{background:linear-gradient(135deg,#1A3820,#1A5030);}
+.mh.c4{background:linear-gradient(135deg,#2A1A50,#3A2560);}
+.mh.c5{background:linear-gradient(135deg,#1A2A50,var(--az));}
+.mh-ey{display:inline-block;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:600;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.1);color:var(--do2);margin-bottom:10px;}
+.mh h1{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,3vw,2.3rem);font-weight:700;color:#fff;line-height:1.15;margin-bottom:6px;}
+.mh h1 em{color:var(--do2);font-style:italic;}
+.mh p{font-size:.85rem;color:rgba(255,255,255,.6);max-width:460px;line-height:1.65;}
+.mh-pills{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap;}
+.mp{font-size:10px;padding:3px 9px;border-radius:18px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+
+/* CONTENT */
+.mc{padding:28px 44px 48px;max-width:800px;}
+.ms{margin-bottom:28px;}
+
+/* THEORY BLOCK */
+.th-block{margin-bottom:20px;}
+.th-label{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--cel);margin-bottom:6px;}
+.th-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--az);margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--azlt);}
+.th-title em{font-style:italic;color:var(--do);}
+.th-body{font-size:.88rem;color:var(--gr2);line-height:1.85;margin-bottom:10px;}
+.th-body strong{color:var(--gr);font-weight:600;}
+
+/* CONCEPT CARDS */
+.cc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0;}
+.cc{border-radius:10px;padding:16px 14px;}
+.cc.bl{background:var(--azlt);border-top:3px solid var(--cel);}
+.cc.gl{background:var(--dolt);border-top:3px solid var(--do);}
+.cc.gr{background:var(--velt);border-top:3px solid var(--ve);}
+.cc h4{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;}
+.cc.bl h4{color:var(--cel);}
+.cc.gl h4{color:var(--do);}
+.cc.gr h4{color:var(--ve);}
+.cc p{font-size:.79rem;color:var(--gr2);line-height:1.6;}
+.cc .eg{font-size:.74rem;font-style:italic;margin-top:5px;border-top:1px solid rgba(0,0,0,.06);padding-top:5px;}
+.cc.bl .eg{color:var(--cel);}
+.cc.gl .eg{color:var(--do);}
+.cc.gr .eg{color:var(--ve);}
+
+/* QUOTE / KEY DEF */
+.kd{background:var(--az);border-radius:12px;padding:20px 22px;margin:16px 0;position:relative;overflow:hidden;}
+.kd::before{content:'"';font-family:'Cormorant Garamond',serif;font-size:8rem;color:rgba(255,255,255,.05);position:absolute;top:-20px;left:8px;line-height:1;}
+.kd p{font-size:.9rem;color:#fff;line-height:1.7;font-style:italic;position:relative;}
+.kd cite{display:block;font-size:.72rem;color:var(--do2);margin-top:8px;font-style:normal;letter-spacing:.5px;}
+
+/* INFO BOX */
+.ib{border-radius:10px;padding:14px 16px;margin:12px 0;}
+.ib.az{background:var(--azlt);border-left:4px solid var(--cel);}
+.ib.do{background:var(--dolt);border-left:4px solid var(--do);}
+.ib.ve{background:var(--velt);border-left:4px solid var(--ve);}
+.ib.re{background:var(--rlt);border-left:4px solid #E53935;}
+.ib h4{font-size:.82rem;font-weight:600;color:var(--az);margin-bottom:6px;}
+.ib p,.ib li{font-size:.82rem;color:var(--gr);line-height:1.75;}
+.ib ul,.ib ol{padding-left:16px;}
+.ib li{margin-bottom:2px;}
+
+/* EXAMPLE STORY */
+.story{background:#fff;border-radius:12px;padding:18px 20px;box-shadow:0 2px 14px rgba(0,0,0,.07);margin:14px 0;border-left:4px solid var(--cel);}
+.story:nth-of-type(2){border-left-color:var(--ve);}
+.story:nth-of-type(3){border-left-color:var(--do);}
+.story h4{font-size:.86rem;font-weight:600;color:var(--az);margin-bottom:6px;}
+.story p{font-size:.83rem;color:var(--gr2);line-height:1.75;}
+.story .moral{font-size:.78rem;font-weight:600;color:var(--ve);margin-top:8px;padding-top:8px;border-top:1px solid #eee;}
+
+/* STEPS */
+.step{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;}
+.step-n{width:38px;height:38px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;color:#fff;}
+.step-n.s1{background:var(--az);}
+.step-n.s2{background:var(--cel);}
+.step-n.s3{background:var(--do);}
+.step-n.s4{background:var(--ve);}
+.step-b h4{font-size:.84rem;font-weight:600;color:var(--az);margin-bottom:2px;}
+.step-b p{font-size:.81rem;color:var(--gr2);line-height:1.6;}
+
+/* TWO COL */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0;}
+
+/* DIVIDER */
+.sec-div{height:1px;background:linear-gradient(to right,var(--azlt),transparent);margin:24px 0;}
+
+/* ── QUIZ ── */
+.quiz{background:#fff;border-radius:14px;box-shadow:0 3px 18px rgba(0,0,0,.08);overflow:hidden;margin-top:24px;}
+.quiz-h{padding:16px 20px;background:var(--az);display:flex;align-items:center;gap:10px;}
+.quiz-h h3{font-size:.92rem;font-weight:600;color:#fff;}
+.quiz-h .qbadge{font-size:10px;padding:2px 8px;border-radius:10px;background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);margin-left:auto;}
+.quiz-body{padding:20px;}
+.q-item{margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid #f0f0f0;}
+.q-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.q-num{font-size:.7rem;font-weight:600;color:var(--cel);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;}
+.q-text{font-size:.88rem;font-weight:500;color:var(--az);margin-bottom:12px;line-height:1.5;}
+.opts{display:flex;flex-direction:column;gap:7px;}
+.opt{display:flex;align-items:flex-start;gap:10px;padding:10px 13px;border-radius:9px;border:2px solid #e8e8e8;cursor:pointer;transition:all .15s;font-size:.83rem;color:var(--gr);line-height:1.4;}
+.opt:hover{border-color:var(--cel);background:#EBF5FF;}
+.opt input{margin-top:2px;flex-shrink:0;accent-color:var(--az);}
+.opt.correct{border-color:var(--ve);background:var(--velt);color:var(--ve);font-weight:500;}
+.opt.wrong{border-color:#E53935;background:var(--rlt);color:#C62828;}
+.opt.missed{border-color:var(--ve);background:var(--velt);color:var(--ve);opacity:.6;}
+.opt.disabled{pointer-events:none;}
+.q-feedback{display:none;font-size:.8rem;margin-top:8px;padding:9px 12px;border-radius:8px;line-height:1.5;}
+.q-feedback.ok{background:var(--velt);color:var(--ve);border-left:3px solid var(--ve);}
+.q-feedback.fail{background:var(--rlt);color:#C62828;border-left:3px solid #E53935;}
+
+/* REFLECTION */
+.refl{background:#fff;border-radius:12px;box-shadow:0 2px 14px rgba(0,0,0,.06);padding:18px 20px;margin-top:16px;}
+.refl h4{font-size:.86rem;font-weight:600;color:var(--az);margin-bottom:4px;}
+.refl p{font-size:.78rem;color:var(--gr2);margin-bottom:10px;line-height:1.6;}
+.refl textarea{width:100%;padding:10px 12px;border:2px solid #eee;border-radius:8px;font-family:'Outfit',sans-serif;font-size:.85rem;color:var(--gr);resize:vertical;min-height:72px;transition:border-color .2s;}
+.refl textarea:focus{outline:none;border-color:var(--cel);}
+
+/* SCORE */
+.score-box{display:none;padding:14px 16px;border-radius:10px;margin-top:14px;text-align:center;}
+.score-box.pass{background:var(--velt);border:2px solid var(--ve);}
+.score-box.fail{background:var(--rlt);border:2px solid #E53935;}
+.score-box .sn{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;}
+.score-box.pass .sn{color:var(--ve);}
+.score-box.fail .sn{color:#C62828;}
+.score-box p{font-size:.82rem;margin-top:4px;}
+.score-box.pass p{color:var(--ve);}
+.score-box.fail p{color:#C62828;}
+
+/* COMPLETE BTN */
+.complete-btn{display:none;width:100%;padding:12px;background:var(--ve);color:#fff;border:none;border-radius:10px;font-family:'Outfit',sans-serif;font-size:.92rem;font-weight:600;cursor:pointer;margin-top:14px;}
+.complete-btn:hover{background:#156B4A;}
+.complete-btn.show{display:block;}
+.saved-ok{display:none;text-align:center;font-size:.8rem;color:var(--ve);margin-top:6px;}
+
+.quiz-submit{width:100%;padding:11px;background:var(--az);color:#fff;border:none;border-radius:9px;font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:600;cursor:pointer;margin-top:16px;}
+.quiz-submit:hover{background:var(--az2);}
+.quiz-submit:disabled{background:#ccc;cursor:default;}
+
+.next-btn{display:inline-flex;align-items:center;gap:6px;background:var(--az);color:#fff;border:none;padding:10px 22px;border-radius:22px;font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;margin-top:14px;}
+.next-btn:hover{background:var(--az2);}
+.next-btn.do{background:var(--do);color:var(--az);}
+
+/* CERT */
+.cert{background:linear-gradient(135deg,var(--az),var(--az2));border-radius:16px;padding:28px;text-align:center;margin-top:20px;}
+.cert h2{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:#fff;margin-bottom:6px;}
+.cert p{font-size:.85rem;color:rgba(255,255,255,.7);line-height:1.6;}
+.cert .star{font-size:2rem;margin-bottom:10px;}
+
+/* DASHBOARD */
+.dh{background:var(--az);padding:20px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.dh h1{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:#fff;}
+.dh p{font-size:.76rem;color:rgba(255,255,255,.5);margin-top:1px;}
+.dacts{display:flex;gap:7px;flex-wrap:wrap;}
+.db{padding:7px 14px;border-radius:16px;font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:600;cursor:pointer;border:none;}
+.db-out{background:transparent;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.8);}
+.db-out:hover{background:rgba(255,255,255,.1);}
+.db-gld{background:var(--do);color:var(--az);}
+.dbody{padding:20px 28px;}
+.dstats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:20px;}
+.dstat{background:#fff;border-radius:10px;padding:16px;box-shadow:0 2px 10px rgba(0,0,0,.06);text-align:center;}
+.dstat .dn{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:700;color:var(--az);line-height:1;}
+.dstat .dn.gold{color:var(--do);}
+.dstat .dn.grn{color:var(--ve);}
+.dstat .dl{font-size:.7rem;color:var(--gr2);margin-top:2px;}
+.dtbl{background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.06);overflow:hidden;}
+.dtbl-h{padding:12px 16px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.dtbl-h h2{font-size:.88rem;font-weight:600;color:var(--az);}
+.srch{padding:7px 11px;border:1px solid #e0e0e0;border-radius:7px;font-family:'Outfit',sans-serif;font-size:.78rem;width:200px;}
+table{width:100%;border-collapse:collapse;}
+th{padding:8px 12px;text-align:left;font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--gr2);background:#fafafa;border-bottom:1px solid #f0f0f0;white-space:nowrap;}
+td{padding:10px 12px;font-size:.79rem;color:var(--gr);border-bottom:1px solid #f5f5f5;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:#fafafa;}
+.dots{display:flex;gap:3px;}
+.dot{width:19px;height:19px;border-radius:50%;background:#e8e8e8;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#aaa;}
+.dot.done{background:var(--ve);color:#fff;}
+.vbtn{padding:4px 9px;border-radius:6px;background:var(--azlt);color:var(--az);border:none;font-size:.71rem;font-weight:600;cursor:pointer;}
+.vbtn:hover{background:var(--cel);color:#fff;}
+.bdg{display:inline-block;padding:2px 7px;border-radius:8px;font-size:.69rem;font-weight:600;}
+.bdg-g{background:var(--velt);color:var(--ve);}
+.bdg-y{background:var(--dolt);color:var(--do);}
+.bdg-x{background:#f0f0f0;color:#888;}
+.empty{text-align:center;padding:32px;color:var(--gr2);font-size:.84rem;}
+
+/* MODAL */
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:center;justify-content:center;padding:16px;}
+.ov.open{display:flex;}
+.mod{background:#fff;border-radius:14px;width:100%;max-width:620px;max-height:87vh;overflow-y:auto;}
+.mod-h{padding:16px 20px;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#fff;}
+.mod-h h2{font-size:.9rem;font-weight:600;color:var(--az);}
+.mod-h button{background:none;border:none;font-size:1.1rem;cursor:pointer;color:var(--gr2);}
+.mod-b{padding:16px 20px;}
+.mod-s{margin-bottom:16px;}
+.mod-s h3{font-size:.74rem;font-weight:600;color:var(--gr2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;}
+.mod-a{background:var(--cr);border-radius:7px;padding:9px 11px;margin-bottom:5px;}
+.mod-a .mq{font-size:.72rem;font-weight:600;color:var(--az);margin-bottom:2px;}
+.mod-a .ma{font-size:.82rem;color:var(--gr);line-height:1.55;}
+.mod-sc{display:inline-flex;align-items:center;gap:4px;font-size:.8rem;font-weight:600;}
+.mod-sc.p{color:var(--ve);}
+.mod-sc.f{color:#C62828;}
+
+.hb{display:none;position:fixed;top:11px;left:11px;z-index:200;background:var(--az);border:none;color:#fff;width:34px;height:34px;border-radius:7px;cursor:pointer;font-size:.95rem;align-items:center;justify-content:center;}
+
+@media(max-width:768px){
+  .sb{transform:translateX(-100%);}
+  .sb.open{transform:translateX(0);}
+  .mn{margin-left:0;}
+  .mh{padding:68px 20px 24px;}
+  .mc{padding:20px 20px 40px;}
+  .cc-grid,.g2{grid-template-columns:1fr;}
+  .hb{display:flex;}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="screen active" id="s-login">
+  <div class="card">
+    <div class="card-logo">
+      <div class="org">Automóvil Club Argentino</div>
+      <h1>Motivación Trascendente</h1>
+      <p>Ingresá tu matrícula para comenzar</p>
+    </div>
+    <div class="fg">
+      <label>Matrícula</label>
+      <input class="fi" id="imat" type="text" placeholder="Ej: 19247" maxlength="10" oninput="onMat(this.value)">
+    </div>
+    <div class="prev" id="prev">
+      <div class="pl">Datos encontrados</div>
+      <div class="pn" id="pn"></div>
+      <div class="ps" id="pd"></div>
+      <div class="ps" id="pg"></div>
+    </div>
+    <div class="nf" id="nf">Matrícula no encontrada. Verificá el número.</div>
+    <button class="btn btn-az" style="margin-top:4px" onclick="doLogin()">Ingresar al curso →</button>
+    <div class="err" id="lerr"></div>
+    <div class="div">¿Sos el facilitador?</div>
+    <button class="btn btn-out" onclick="goFac()">Acceder al panel de seguimiento</button>
+  </div>
+</div>
+
+<!-- FAC LOGIN -->
+<div class="screen" id="s-fac">
+  <div class="card">
+    <div class="card-logo">
+      <div class="org" style="color:#4CAF50">Panel Facilitador</div>
+      <h1>Dashboard de seguimiento</h1>
+      <p>Ingresá la clave de acceso</p>
+    </div>
+    <div class="fg">
+      <label>Clave</label>
+      <input class="fi" id="ipass" type="password" placeholder="Clave del facilitador" onkeydown="if(event.key==='Enter')doFacLogin()">
+    </div>
+    <button class="btn btn-ve" onclick="doFacLogin()">Acceder →</button>
+    <div class="err" id="ferr"></div>
+    <div class="div"></div>
+    <button class="btn btn-out" onclick="goScreen('s-login')">← Volver</button>
+  </div>
+</div>
+
+<!-- COURSE -->
+<div class="screen" id="s-course">
+  <button class="hb" onclick="togSB()">☰</button>
+  <nav class="sb" id="sb">
+    <div class="sb-top">
+      <div class="urow">
+        <div class="uav" id="uav">?</div>
+        <div><div class="un" id="un">—</div><div class="ud" id="ud">—</div><div class="ug" id="ug">—</div></div>
+      </div>
+      <div class="pbox">
+        <div class="plbl">Progreso</div>
+        <div class="pbar"><div class="pbar-f" id="pbf" style="width:0%"></div></div>
+        <div class="ppct" id="ppct">0 / 5 módulos</div>
+      </div>
+    </div>
+    <div class="snav">
+      <a class="ni active" onclick="goP(0)" href="#"><div class="nn">★</div><div class="nt"><strong>Introducción</strong>Fundamentos</div></a>
+      <a class="ni" id="n1" onclick="goP(1)" href="#"><div class="nn">1</div><div class="nt"><strong>Módulo 1</strong>Los tres motores</div></a>
+      <a class="ni" id="n2" onclick="goP(2)" href="#"><div class="nn">2</div><div class="nt"><strong>Módulo 2</strong>La fuerza trascendente</div></a>
+      <a class="ni" id="n3" onclick="goP(3)" href="#"><div class="nn">3</div><div class="nt"><strong>Módulo 3</strong>Valores y propósito</div></a>
+      <a class="ni" id="n4" onclick="goP(4)" href="#"><div class="nn">4</div><div class="nt"><strong>Módulo 4</strong>Liderazgo trascendental</div></a>
+      <a class="ni" id="n5" onclick="goP(5)" href="#"><div class="nn">5</div><div class="nt"><strong>Módulo 5</strong>El equipo trascendente</div></a>
+    </div>
+    <div class="sb-foot" style="display:flex;flex-direction:column;gap:8px;">
+  <button onclick="cerrarSesion()" style="width:100%;padding:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:8px;color:rgba(255,255,255,.7);font-family:'Outfit',sans-serif;font-size:.75rem;cursor:pointer;">⬤ Cerrar sesión</button>
+  <span style="font-size:.63rem;color:rgba(255,255,255,.25);">ACA · Curso autogestivo · 2024</span>
+</div>
+  </nav>
+  <main class="mn">
+    <div class="tbar"><div class="tbar-f" id="tbf" style="width:0%"></div></div>
+
+    <!-- PANEL 0: INTRO -->
+    <div class="panel active" id="p0">
+      <div class="mh c0">
+        <div class="mh-ey">Bienvenida</div>
+        <h1>Motivación <em>Trascendente</em></h1>
+        <p>Un curso para descubrir la fuerza más poderosa que puede mover a un equipo: actuar por el bien de los demás — socios, clientes, compañeros, concesionarios y comunidad.</p>
+        <div class="mh-pills"><span class="mp">📚 5 módulos</span><span class="mp">⏱ 15 min c/u</span><span class="mp">🎯 Autogestivo</span><span class="mp">✅ Quiz + reflexión</span></div>
+      </div>
+      <div class="mc">
+        <div class="th-block">
+          <div class="th-label">Sobre este curso</div>
+          <div class="th-title">¿Cómo funciona?</div>
+          <p class="th-body">Este curso es <strong>100% autogestivo</strong>: lo hacés a tu ritmo, cuando tenés tiempo, desde donde quieras. Cada módulo tiene contenido teórico con ejemplos reales, un quiz para verificar lo aprendido y una pregunta de reflexión personal. Al completar los 5 módulos quedará registrado tu avance.</p>
+        </div>
+        <div class="ib az">
+          <h4>Antes de empezar</h4>
+          <ul>
+            <li>Leé con atención cada sección — el quiz evalúa comprensión, no memoria</li>
+            <li>Podés volver a los módulos cuando quieras</li>
+            <li>Las reflexiones son personales y se guardan en tu registro</li>
+            <li>Necesitás aprobar el quiz (60% mínimo) para completar cada módulo</li>
+          </ul>
+        </div>
+        <div class="cc-grid">
+          <div class="cc bl"><h4>Módulo 1</h4><p>Los tres tipos de motivación y por qué la trascendente es diferente</p></div>
+          <div class="cc gl"><h4>Módulo 2</h4><p>El poder de actuar por otros y ejemplos que lo demuestran</p></div>
+          <div class="cc gr"><h4>Módulo 3</h4><p>Valores personales como raíz de la motivación trascendente</p></div>
+          <div class="cc bl"><h4>Módulo 4</h4><p>Liderazgo trascendental: los tres tipos y sus diferencias</p></div>
+          <div class="cc gl"><h4>Módulo 5</h4><p>Cómo construir un equipo con motivación trascendente sostenida</p></div>
+        </div>
+        <button class="next-btn do" onclick="goP(1)">Comenzar Módulo 1 →</button>
+      </div>
+    </div>
+
+    <!-- PANEL 1 -->
+    <div class="panel" id="p1">
+      <div class="mh c1">
+        <div class="mh-ey">Módulo 1 · 15 min</div>
+        <h1>Los <em>tres motores</em> de la motivación</h1>
+        <p>¿Qué nos mueve a actuar? La teoría de Pérez López y cómo se aplica en el ACA.</p>
+        <div class="mh-pills"><span class="mp">📖 Teoría</span><span class="mp">💡 Ejemplos</span><span class="mp">✅ Quiz 5 preguntas</span></div>
+      </div>
+      <div class="mc">
+        <div class="th-block">
+          <div class="th-label">Teoría central</div>
+          <div class="th-title">El modelo de <em>Pérez López</em></div>
+          <p class="th-body">Juan Antonio Pérez López, profesor del IESE Business School (Universidad de Navarra), desarrolló en 1991 una teoría que cambió la forma de entender la motivación en las organizaciones. Su propuesta principal es que toda acción humana está impulsada por <strong>tres tipos de motivación que conviven simultáneamente</strong>, pero en distintas proporciones según la persona.</p>
+          <p class="th-body">Lo que hace única su teoría es que mientras los enfoques anteriores solo reconocían los dos primeros tipos, Pérez López añadió un tercero que consideró el más importante: la <strong>motivación trascendente</strong>.</p>
+        </div>
+        <div class="kd">
+          <p>"La calidad motivacional de una persona viene determinada por la sensibilidad que tiene para ser movida por motivos trascendentes: actuar basándose en las consecuencias que sus acciones tienen para otras personas."</p>
+          <cite>— Juan Antonio Pérez López, IESE Business School</cite>
+        </div>
+        <div class="sec-div"></div>
+        <div class="th-block">
+          <div class="th-title">Los <em>tres tipos</em> en detalle</div>
+          <p class="th-body">Estos tres tipos no son excluyentes: siempre conviven en cada acción. Lo que define la calidad de una persona es <strong>cuál predomina</strong> al momento de tomar decisiones.</p>
+        </div>
+        <div class="cc-grid">
+          <div class="cc bl">
+            <h4>1. Extrínseca</h4>
+            <p><strong>Motor:</strong> Las consecuencias externas de la acción.<br><br>Me muevo por lo que voy a recibir: salario, reconocimiento, ascenso, evitar un castigo. Es el tipo más básico y también el más frágil: cuando la recompensa desaparece, la motivación también.</p>
+            <p class="eg">En el ACA: "Atiendo bien al socio porque si tengo quejas me bajan el presentismo."</p>
+          </div>
+          <div class="cc gl">
+            <h4>2. Intrínseca</h4>
+            <p><strong>Motor:</strong> La satisfacción que genera la tarea en sí misma.<br><br>Me muevo porque disfruto lo que hago, aprendo, siento que soy capaz. Más duradera que la extrínseca, pero sigue centrada en uno mismo. Puede bajar en días rutinarios o cuando la tarea pierde desafío.</p>
+            <p class="eg">En el ACA: "Me gusta resolver situaciones complicadas y ver que el socio queda tranquilo."</p>
+          </div>
+          <div class="cc gr">
+            <h4>3. Trascendente</h4>
+            <p><strong>Motor:</strong> El impacto que mis acciones tienen en otras personas.<br><br>No busco mi beneficio sino el bien del otro. No depende de recompensas ni de si la tarea es interesante. Es la motivación más sólida, más sostenible y la de mayor calidad según Pérez López.</p>
+            <p class="eg">En el ACA: "Sé que hay una familia esperando asistencia. Eso me mueve a dar lo mejor."</p>
+          </div>
+        </div>
+        <div class="sec-div"></div>
+        <div class="th-block">
+          <div class="th-title">Un ejemplo <em>concreto</em> en el ACA</div>
+          <p class="th-body">Tres personas trabajan en el centro de atención al socio. Las tres hacen exactamente lo mismo, pero las mueven motivos completamente distintos:</p>
+        </div>
+        <div class="story">
+          <h4>👤 Persona A — Motivación extrínseca dominante</h4>
+          <p>Llega al trabajo pensando en cumplir su horario y no tener problemas. Cuando no hay supervisión directa, hace lo mínimo. Si le mejoran el sueldo, rinde más; si no, se estanca. Su pregunta interna es siempre: <em>"¿Qué gano yo con esto?"</em></p>
+          <div class="moral">→ Rendimiento variable. Depende del control externo.</div>
+        </div>
+        <div class="story">
+          <h4>👤 Persona B — Motivación intrínseca dominante</h4>
+          <p>Le encanta cuando llega un caso difícil porque siente que puede demostrar su capacidad. En días rutinarios baja la energía. Crece mucho cuando aprende algo nuevo, pero si la tarea no la desafía, puede desmotivarse aunque el sueldo sea bueno.</p>
+          <div class="moral">→ Rendimiento alto en situaciones desafiantes. Variable en lo rutinario.</div>
+        </div>
+        <div class="story">
+          <h4>👤 Persona C — Motivación trascendente integrada</h4>
+          <p>Sabe que del otro lado del teléfono hay una persona asustada, una familia varada, alguien que confió en el ACA. Eso la mueve independientemente de si la supervisan, del sueldo o de si la llamada es interesante. Su energía no depende de factores externos.</p>
+          <div class="moral">→ Rendimiento consistente y alto. No depende del control ni del desafío.</div>
+        </div>
+        <div class="ib do">
+          <h4>La pregunta clave</h4>
+          <p>Pérez López propone hacerse esta pregunta al final del día: <em>"¿Actué hoy pensando en lo que yo obtenía, en lo que yo sentía, o en lo que otros necesitaban?"</em> Esos "otros" pueden ser un socio, un cliente, un compañero de equipo, un concesionario, el empleado de ese concesionario, o la comunidad que confía en el ACA. La respuesta honesta revela cuál es el motor predominante.</p>
+        </div>
+
+        <!-- QUIZ 1 -->
+        <div class="quiz">
+          <div class="quiz-h"><h3>Quiz — Módulo 1</h3><span class="qbadge">5 preguntas · mínimo 60%</span></div>
+          <div class="quiz-body" id="qb1">
+            <div class="q-item">
+              <div class="q-num">Pregunta 1</div>
+              <div class="q-text">Según Pérez López, ¿qué determina la calidad motivacional de una persona?</div>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="q1" value="a"> Su nivel salarial y las condiciones de trabajo</label>
+                <label class="opt"><input type="radio" name="q1" value="b"> La sensibilidad para ser movida por motivos trascendentes</label>
+                <label class="opt"><input type="radio" name="q1" value="c"> La cantidad de años de experiencia en la organización</label>
+                <label class="opt"><input type="radio" name="q1" value="d"> El tipo de tareas que realiza cotidianamente</label>
+              </div>
+              <div class="q-feedback" id="f1q1"></div>
+            </div>
+            <div class="q-item">
+              <div class="q-num">Pregunta 2</div>
+              <div class="q-text">¿Cuál de estas afirmaciones describe mejor la motivación extrínseca?</div>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="q2" value="a"> Me muevo porque disfruto genuinamente mi tarea</label>
+                <label class="opt"><input type="radio" name="q2" value="b"> Me muevo porque quiero impactar positivamente en otros</label>
+                <label class="opt"><input type="radio" name="q2" value="c"> Me muevo por recompensas o para evitar consecuencias negativas</label>
+                <label class="opt"><input type="radio" name="q2" value="d"> Me muevo porque siento que la tarea me hace crecer</label>
+              </div>
+              <div class="q-feedback" id="f1q2"></div>
+            </div>
+            <div class="q-item">
+              <div class="q-num">Pregunta 3</div>
+              <div class="q-text">Un empleado trabaja con mucho esfuerzo en un proyecto difícil porque le encanta aprender cosas nuevas. ¿Qué tipo de motivación predomina?</div>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="q3" value="a"> Extrínseca</label>
+                <label class="opt"><input type="radio" name="q3" value="b"> Intrínseca</label>
+                <label class="opt"><input type="radio" name="q3" value="c"> Trascendente</label>
+                <label class="opt"><input type="radio" name="q3" value="d"> Ninguna de las anteriores</label>
+              </div>
+              <div class="q-feedback" id="f1q3"></div>
+            </div>
+            <div class="q-item">
+              <div class="q-num">Pregunta 4</div>
+              <div class="q-text">¿Por qué la motivación extrínseca es considerada la más frágil?</div>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="q4" value="a"> Porque solo funciona en personas jóvenes</label>
+                <label class="opt"><input type="radio" name="q4" value="b"> Porque cuando desaparece la recompensa, desaparece también la motivación</label>
+                <label class="opt"><input type="radio" name="q4" value="c"> Porque genera demasiado estrés en la persona</label>
+                <label class="opt"><input type="radio" name="q4" value="d"> Porque no produce buenos resultados en el corto plazo</label>
+              </div>
+              <div class="q-feedback" id="f1q4"></div>
+            </div>
+            <div class="q-item">
+              <div class="q-num">Pregunta 5</div>
+              <div class="q-text">¿Cuál de los tres tipos de motivación convive con los otros dos?</div>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="q5" value="a"> Solo la trascendente</label>
+                <label class="opt"><input type="radio" name="q5" value="b"> Solo la intrínseca y la extrínseca</label>
+                <label class="opt"><input type="radio" name="q5" value="c"> Los tres tipos conviven siempre en toda acción humana</label>
+                <label class="opt"><input type="radio" name="q5" value="d"> Ninguno convive con los otros</label>
+              </div>
+              <div class="q-feedback" id="f1q5"></div>
+            </div>
+            <button class="quiz-submit" id="qs1" onclick="submitQuiz(1)">Ver resultados</button>
+            <div class="score-box" id="sc1"></div>
+          </div>
+        </div>
+        <div class="refl" id="refl1" style="display:none">
+          <h4>💭 Reflexión personal</h4>
+          <p>Pensá en tu trabajo del último mes. ¿Cuál de los tres tipos de motivación sentís que predominó en vos? ¿Hubo momentos en que actuaste movido/a por la motivación trascendente sin haberte dado cuenta?</p>
+          <textarea id="rt1" placeholder="Escribí tu reflexión acá..." rows="3"></textarea>
+        </div>
+        <button class="complete-btn" id="cb1" onclick="completeModule(1)">✓ Completar Módulo 1 y continuar</button>
+        <div class="saved-ok" id="ok1"></div>
+      </div>
+    </div>
+
+    <!-- PANEL 2 -->
+    <div class="panel" id="p2">
+      <div class="mh c2">
+        <div class="mh-ey">Módulo 2 · 15 min</div>
+        <h1>La <em>fuerza</em> de actuar por otros</h1>
+        <p>Por qué la motivación trascendente es la más duradera. Casos reales que lo demuestran.</p>
+        <div class="mh-pills"><span class="mp">📖 Teoría</span><span class="mp">📚 Casos reales</span><span class="mp">✅ Quiz 5 preguntas</span></div>
+      </div>
+      <div class="mc">
+        <div class="th-block">
+          <div class="th-label">Conceptos clave</div>
+          <div class="th-title">¿Por qué es la más <em>poderosa</em>?</div>
+          <p class="th-body">La motivación trascendente tiene una característica que la diferencia radicalmente de las otras dos: <strong>no depende de factores externos ni internos variables</strong>. No depende de si te pagan bien, de si la tarea es interesante, ni de si alguien te controla. Depende de algo mucho más estable: la convicción de que tu acción importa a alguien.</p>
+          <p class="th-body">Pérez López señala que cuando una persona actúa movida principalmente por motivos trascendentes, se desarrolla en ella algo que llama <strong>unidad</strong>: una coherencia entre lo que piensa, lo que siente y lo que hace. Esa coherencia genera energía sostenida que ninguna recompensa externa puede crear.</p>
+        </div>
+        <div class="kd">
+          <p>"Cuando se combinan adecuadamente la motivación intrínseca y la trascendental, el resultado es explosivo: no hay quien pare a esa persona o ese equipo."</p>
+          <cite>— Santiago Torre, basado en Pérez López</cite>
+        </div>
+        <div class="sec-div"></div>
+        <div class="th-block">
+          <div class="th-title">La <em>escalera</em> de calidad motivacional</div>
+          <p class="th-body">Pérez López propone que la calidad de un equipo —y de una organización— se puede medir según qué tipo de motivos predominan en las decisiones de sus miembros.</p>
+        </div>
+        <div class="step"><div class="step-n s1">1</div><div class="step-b"><h4>Solo motivación extrínseca</h4><p>Las personas hacen lo mínimo para obtener su recompensa. Sin supervisión, el rendimiento cae. La organización funciona solo si hay control constante.</p></div></div>
+        <div class="step"><div class="step-n s2">2</div><div class="step-b"><h4>Extrínseca + intrínseca</h4><p>Hay compromiso genuino con el trabajo. Las personas crecen y disfrutan sus tareas. El clima mejora, pero puede seguir habiendo individualismo y falta de cuidado mutuo.</p></div></div>
+        <div class="step"><div class="step-n s3">3</div><div class="step-b"><h4>Las tres motivaciones integradas</h4><p>Las personas piensan en el impacto que generan en sus compañeros, en los socios y en la institución. Aparece el verdadero espíritu de equipo. El clima positivo se sostiene sin necesidad de control.</p></div></div>
+        <div class="step"><div class="step-n s4">4</div><div class="step-b"><h4>Predominio de la motivación trascendente</h4><p>El equipo actúa principalmente por el bien de los demás. El resultado es extraordinario y sostenido en el tiempo. Es el nivel de los equipos que dejan huella.</p></div></div>
+        <div class="sec-div"></div>
+        <div class="th-block">
+          <div class="th-title">Casos que <em>lo demuestran</em></div>
+          <p class="th-body">La motivación trascendente no es un concepto abstracto. Se ve en personas reales, en situaciones concretas — y los destinatarios son mucho más variados de lo que solemos pensar:</p>
+        </div>
+        <div class="story">
+          <h4>🏥 El médico de guardia en la clínica pública</h4>
+          <p>Trabaja 24 horas seguidas, con sueldo bajo, equipos viejos, y pacientes que a veces llegan agresivos. Sin embargo, año tras año elige esa guardia. Cuando le preguntan por qué no se va al sector privado, responde: <em>"Porque cuando veo a alguien que llega con miedo y se va tranquilo, siento que hice algo que valió la pena. No hay bono que me dé eso."</em><br><br>Su motivación no viene del sueldo (extrínseca baja), ni del desafío de cada caso (intrínseca moderada). Viene del impacto en la vida de sus pacientes. Eso es lo que lo sostiene cuando las condiciones son duras.</p>
+          <div class="moral">→ Clave: el impacto en el otro como fuente de energía inagotable.</div>
+        </div>
+        <div class="story">
+          <h4>🚒 El bombero voluntario argentino</h4>
+          <p>En Argentina hay más de 40.000 bomberos voluntarios. No cobran. Trabajan de noche, en frío, en situaciones de alto riesgo, con equipos que muchas veces financian ellos mismos. Los fines de semana se pierden reuniones familiares para ir a una capacitación. ¿Qué los sostiene?<br><br>La mayoría dice lo mismo: <em>"Cuando salvás algo —una persona, una casa, una mascota— sentís que importás. Que tu presencia cambió lo que iba a pasar."</em> Eso es exactamente la motivación trascendente en su estado más puro.</p>
+          <div class="moral">→ Clave: actúan por el bien de otros sin ninguna recompensa material.</div>
+        </div>
+        <div class="story">
+          <h4>🛣️ El técnico de asistencia en ruta del ACA</h4>
+          <p>Son las 2 de la mañana. Un técnico recibe el llamado de asistencia. Hace frío. El socio está en una ruta oscura, con la familia adentro del auto. El técnico llega, evalúa el problema, lo resuelve. Antes de irse ve en la cara del socio algo que ningún bono puede comprar: alivio genuino.<br><br>Ese técnico podría hacer su trabajo de forma mecánica, sin hablar, sin explicar. Pero el que actúa con motivación trascendente sabe que ese momento importa: una familia volvió a sentirse segura gracias a él.</p>
+          <div class="moral">→ Clave: la conexión entre la tarea y su impacto real en personas concretas.</div>
+        </div>
+        <div class="story">
+          <h4>🤝 El empleado de back-office que piensa en el concesionario</h4>
+          <p>Trabaja en la liquidación de servicios entre el ACA y una red de concesionarios. Su tarea parece puramente administrativa. Pero sabe que del otro lado hay una empresa chica, con empleados que cobran su sueldo en función de que esa liquidación llegue bien y a tiempo. Cuando detecta un error antes de enviarlo, no lo hace por cumplir: lo hace porque sabe que corregirlo evita un problema real a personas reales en ese concesionario.<br><br><em>"Si lo mando mal, alguien allá va a tener un dolor de cabeza que yo puedo evitar. Eso me importa."</em></p>
+          <div class="moral">→ La trascendencia no requiere contacto directo con el socio. Aplica a cada vínculo en la cadena.</div>
+        </div>
+        <div class="story">
+          <h4>👥 El supervisor que piensa en su equipo</h4>
+          <p>Tiene que armar el turno del fin de semana. Podría hacerlo de la forma más conveniente para él. En cambio, se toma el tiempo de preguntar quién tiene compromisos familiares, quién pidió ese sábado con anticipación, quién lleva más semanas sin descansar. No porque haya una norma que lo obligue, sino porque sabe que un equipo que siente que lo cuidan, cuida mejor a los socios y clientes.<br><br><em>"Si mis compañeros están bien, trabajan bien. Y si trabajan bien, el socio lo nota."</em></p>
+          <div class="moral">→ Cuidar al equipo también es motivación trascendente: los compañeros son el primer "otro" al que impactamos.</div>
+        </div>
+        <div class="ib ve">
+          <h4>¿Qué tienen en común todos estos casos?</h4>
+          <ul>
+            <li>Ninguno depende de condiciones ideales para rendir bien</li>
+            <li>Todos encuentran significado en el impacto que generan en otros</li>
+            <li>Esos "otros" son variados: socios, clientes, compañeros, concesionarios, empleados de terceros</li>
+            <li>Su energía es interna y sostenida, no depende de factores externos</li>
+            <li>Actúan de forma consistente independientemente del control</li>
+          </ul>
+        </div>
+
+        <!-- QUIZ 2 -->
+        <div class="quiz">
+          <div class="quiz-h"><h3>Quiz — Módulo 2</h3><span class="qbadge">5 preguntas · mínimo 60%</span></div>
+          <div class="quiz-body" id="qb2">
+            <div class="q-item">
+              <div class="q-num">Pregunta 1</div>
+              <div class="q-text">¿Qué concepto usa Pérez López para describir la coherencia que genera la motivación trascendente?</div>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="q2_1" value="a"> Eficacia</label>
+                <label class="opt"><input type="radio" name="q2_1" value="b"> Unidad</label>
+                <label class="opt"><input type="radio" name="q2_1" value="c"> Rendimiento</label>
+                <label class="opt"><input type="radio" name="q2_1" value="d"> Atractividad</label>
+              </div>
+              <div class="q-feedback" id="f2q1"></div>
+            </div>
+            <div class="q-item">
+              <div class="q-num">Pregunta 2</div>
+              <div class="q-text">¿Qué característica hace única a la motivación trascendente frente a las otras dos?</div>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="q2_2" value="a"> Que es más fácil de generar que la intrínseca</label>
+                <label class="opt"><input type="radio" name="q2_2" value="b"> Que no depende de factores externos ni internos variables</label>
+                <label class="opt"><input type="radio" name="q2_2" value="c"> Que solo funciona en personas con vocación de servicio</label>
+                <label class="opt"><input type="radio" name="q2_2" value="d"> Que aumenta directamente con el salario</label>
+              </div>
+              <div class="q-feedback" id="f2q2"></div>
+            </div>
+            <div class="q-item">
+              <div class="q-num">Pregunta 3</div>
+              <div class="q-text">En la escalera de calidad motivacional, ¿qué aparece cuando se integran los tres tipos de motivación?</div>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="q2_3" value="a"> Mayor dependencia del control externo</label>
+                <label class="opt"><input type="radio" name="q2_3" value="b"> Conflictos entre los miembros del equipo</label>
+                <label class="opt"><input type="radio" name="q2_3" value="c"> El verdadero espíritu de equipo y clima positivo sostenido</label>
+                <label class="opt"><input type="radio" name="q2_3" value="d"> Solo mejoras en el rendimiento individual</label>
+              </div>
+              <div class="q-feedback" id="f2q3"></div>
+            </div>
+            <div class="q-item">
+              <div class="q-num">Pregunta 4</div>
+              <div class="q-text">El médico de guardia del ejemplo actúa principalmente por:</div>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="q2_4" value="a"> Su salario y las condiciones laborales</label>
+                <label class="opt"><input type="radio" name="q2_4" value="b"> El desafío intelectual de los casos difíciles</label>
+                <label class="opt"><input type="radio" name="q2_4" value="c"> El impacto positivo que genera en la vida de sus pacientes</label>
+                <label class="opt"><input type="radio" name="q2_4" value="d"> El reconocimiento de sus colegas y superiores</label>
+              </div>
+              <div class="q-feedback" id="f2q4"></div>
+            </div>
+            <div class="q-item">
+              <div class="q-num">Pregunta 5</div>
+              <div class="q-text">¿Qué tienen en común el médico, el bombero y el técnico del ACA en los ejemplos del módulo?</div>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="q2_5" value="a"> Todos tienen sueldos muy altos</label>
+                <label class="opt"><input type="radio" name="q2_5" value="b"> Todos trabajan en condiciones ideales</label>
+                <label class="opt"><input type="radio" name="q2_5" value="c"> Encuentran energía sostenida en el impacto que generan en otros</label>
+                <label class="opt"><input type="radio" name="q2_5" value="d"> Todos tienen vocaciones artísticas como hobbie</label>
+              </div>
+              <div class="q-feedback" id="f2q5"></div>
+            </div>
+            <button class="quiz-submit" id="qs2" onclick="submitQuiz(2)">Ver resultados</button>
+            <div class="score-box" id="sc2"></div>
+          </div>
+        </div>
+        <div class="refl" id="refl2" style="display:none">
+          <h4>💭 Reflexión personal</h4>
+          <p>Pensá en alguien de tu entorno laboral — compañero/a, jefe/a, o vos mismo/a — que claramente actúe con motivación trascendente. ¿Cómo se nota en su manera de trabajar? ¿Qué efecto tiene en el resto del equipo?</p>
+          <textarea id="rt2" placeholder="Escribí tu reflexión acá..." rows="3"></textarea>
+        </div>
+        <button class="complete-btn" id="cb2" onclick="completeModule(2)">✓ Completar Módulo 2 y continuar</button>
+        <div class="saved-ok" id="ok2"></div>
+      </div>
+    </div>
+
+    <!-- PANEL 3 -->
+    <div class="panel" id="p3">
+      <div class="mh c3">
+        <div class="mh-ey">Módulo 3 · 15 min</div>
+        <h1>Valores y <em>propósito</em></h1>
+        <p>¿De dónde nace la motivación trascendente? Los valores como raíz y el propósito como ancla.</p>
+        <div class="mh-pills"><span class="mp">📖 Teoría</span><span class="mp">💡 Ejemplos ACA</span><span class="mp">✅ Quiz 5 preguntas</span></div>
+      </div>
+      <div class="mc">
+        <div class="th-block">
+          <div class="th-label">La raíz</div>
+          <div class="th-title">¿De dónde <em>nace</em> la motivación trascendente?</div>
+          <p class="th-body">La motivación trascendente no surge de la nada ni se puede imponer desde afuera. Nace de algo más profundo: los <strong>valores genuinos de cada persona</strong>. Valores como la solidaridad, el servicio, la responsabilidad y el cuidado del otro son los que generan, de forma natural, la disposición a actuar pensando en los demás.</p>
+          <p class="th-body">Esto tiene una implicancia importante: la motivación trascendente no se crea con programas de incentivos ni con discursos motivacionales. Se cultiva cuando una persona conecta con sus propios valores y entiende cómo su trabajo expresa esos valores en la práctica cotidiana.</p>
+        </div>
+        <div class="g2">
+          <div class="ib az">
+            <h4>Valores que la alimentan</h4>
+            <ul>
+              <li>Solidaridad</li>
+              <li>Servicio genuino</li>
+              <li>Responsabilidad</li>
+              <li>Cuidado del otro</li>
+              <li>Lealtad al equipo</li>
+              <li>Honestidad</li>
+              <li>Generosidad</li>
+              <li>Compromiso</li>
+            </ul>
+          </div>
+          <div class="ib ve">
+            <h4>Cómo se expresan en el ACA</h4>
+            <ul>
+              <li>Atender con paciencia al socio enojado</li>
+              <li>Ir más allá de lo pedido</li>
+              <li>Avisar cuando algo puede salir mal</li>
+              <li>Cuidar los detalles aunque nadie los vea</li>
+              <li>Apoyar a un compañero sin que te lo pidan</li>
+              <li>Defender la calidad del servicio</li>
+            </ul>
+          </div>
+        </div>
+        <div class="sec-div"></div>
+        <div class="th-block">
+          <div class="th-title">El <em>propósito</em> como ancla</div>
+          <p class="th-body">Además de los valores individuales, la motivación trascendente se alimenta del <strong>propósito de la organización</strong>. Cuando una persona entiende verdaderamente para qué existe la organización donde trabaja —y siente que ese propósito vale la pena— su motivación trascendente crece de forma natural.</p>
+          <p class="th-body">El ACA tiene un propósito que es naturalmente trascendente: <strong>estar cuando alguien más lo necesita</strong>. No es un slogan: es una descripción exacta de lo que hace la institución. Y ese "alguien" tiene muchas caras: el socio varado en la ruta a medianoche, la familia asustada, el cliente que confió en un servicio, el empleado del concesionario que necesita que la operación cierre bien, el compañero de otro área que depende de nuestra parte del proceso, el equipo que lidera alguien y que necesita sentirse cuidado para poder cuidar a otros.</p>
+        </div>
+        <div class="kd">
+          <p>"La armonización de creencias y valores entre los miembros de una organización es vital para lograr su verdadera ventaja competitiva: el compromiso genuino de su gente."</p>
+          <cite>— Simon Dolan, basado en la teoría de Pérez López</cite>
+        </div>
+        <div class="sec-div"></div>
+        <div class="th-block">
+          <div class="th-title">La cadena de <em>impacto invisible</em></div>
+          <p class="th-body">Una de las razones por las que la motivación trascendente no florece naturalmente es que muchas veces <strong>no vemos el impacto real de nuestro trabajo</strong>. Hacemos una tarea, la entregamos, y nunca sabemos qué pasó después. Eso dificulta conectar la acción con su consecuencia en otras personas.</p>
+          <p class="th-body">Reconstruir esa cadena mentalmente es una herramienta poderosa. Por ejemplo:</p>
+        </div>
+        <div class="story">
+          <h4>🔗 Cadena de impacto — empleado administrativo</h4>
+          <p><strong>Tarea visible:</strong> Procesar correctamente una solicitud de asistencia.<br><br>
+          <strong>Impacto en el compañero:</strong> El técnico recibe información precisa y puede trabajar sin errores.<br><br>
+          <strong>Impacto en el concesionario:</strong> La operación cierra correctamente y el concesionario puede facturar sin problemas.<br><br>
+          <strong>Impacto final en el socio:</strong> Una familia varada en la ruta vuelve a estar segura. Un momento de angustia se transforma en alivio.<br><br>
+          <em>Todo eso empezó con una tarea administrativa que parecía rutinaria.</em></p>
+          <div class="moral">→ Toda tarea impacta en múltiples personas: compañeros, concesionarios, clientes y socios.</div>
+        </div>
+        <div class="story">
+          <h4>🔗 Cadena de impacto — líder de equipo</h4>
+          <p><strong>Tarea visible:</strong> Dar una devolución honesta y constructiva a un integrante del equipo.<br><br>
+          <strong>Impacto en el compañero:</strong> La persona crece, mejora su forma de trabajar, se siente valorada.<br><br>
+          <strong>Impacto en el equipo:</strong> El clima mejora, la confianza crece, el equipo funciona mejor.<br><br>
+          <strong>Impacto final en el socio/cliente:</strong> Un equipo motivado y cohesionado brinda un servicio de mayor calidad.<br><br>
+          <em>Una conversación incómoda pero honesta puede cambiar toda una cadena.</em></p>
+          <div class="moral">→ Cuidar a los compañeros y al equipo también es motivación trascendente en acción.</div>
+        </div>
+
+        <!-- QUIZ 3 -->
+        <div class="quiz">
+          <div class="quiz-h"><h3>Quiz — Módulo 3</h3><span class="qbadge">5 preguntas · mínimo 60%</span></div>
+          <div class="quiz-body" id="qb3">
+            <div class="q-item">
+              <div class="q-num">Pregunta 1</div>
+              <div class="q-text">¿Desde dónde nace genuinamente la motivación trascendente según Pérez López?</div>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="q3_1" value="a"> De los programas de incentivos de la empresa</label>
+                <label class="opt"><input type="radio" name="q3_1" value="b"> De los valores genuinos de cada persona</label>
+                <label class="opt"><input type="radio" name="q3_1" value="c"> Del discurso motivacional de los líderes</label>
+                <label class="opt"><input type="radio" name="q3_1" value="d"> Del nivel de satisfacción con el salario</label>
+              </div>
+              <div class="q-feedback" id="f3q1"></div>
+            </div>
+            <div class="q-item">
+              <div class="q-num">Pregunta 2</div>
+              <div class="q-text">¿Cuál es el propósito del ACA que se menciona en el módulo como naturalmente trascendente?</div>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="q3_2" value="a"> Ser la empresa de servicios más grande de Argentina</label>
+                <label class="opt"><input type="radio" name="q3_2" value="b"> Generar rentabilidad para sus socios fundadores</label>
+                <label class="opt"><input type="radio" name="q3_2" value="c"> Estar cuando alguien más lo necesita</label>
+                <label class="opt"><input type="radio" name="q3_2" value="d"> Ofrecer los mejores precios del mercado</label>
+              </div>
+              <div class="q-feedback" id="f3q2"></div>
+            </div>
+            <div class="q-item">
+              <div class="q-num">Pregunta 3</div>
+              <div class="q-text">¿Qué es la "cadena de impacto invisible" que se describe en el módulo?</div>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="q3_3" value="a"> Los errores que se acumulan sin que nadie los vea</label>
+                <label class="opt"><input type="radio" name="q3_3" value="b"> La secuencia de consecuencias que tiene una tarea en personas reales</label>
+                <label class="opt"><input type="radio" name="q3_3" value="c"> Las tareas que realizan los empleados sin supervisión</label>
+                <label class="opt"><input type="radio" name="q3_3" value="d"> Los beneficios económicos que genera una organización</label>
+              </div>
+              <div class="q-feedback" id="f3q3"></div>
+            </div>
+            <div class="q-item">
+              <div class="q-num">Pregunta 4</div>
+              <div class="q-text">¿Por qué la motivación trascendente no puede "imponerse" desde afuera?</div>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="q3_4" value="a"> Porque solo funciona en personas con estudios universitarios</label>
+                <label class="opt"><input type="radio" name="q3_4" value="b"> Porque nace de valores internos de cada persona, no de factores externos</label>
+                <label class="opt"><input type="radio" name="q3_4" value="c"> Porque requiere muchos años de experiencia laboral</label>
+                <label class="opt"><input type="radio" name="q3_4" value="d"> Porque es un tipo de motivación negativa</label>
+              </div>
+              <div class="q-feedback" id="f3q4"></div>
+            </div>
+            <div class="q-item">
+              <div class="q-num">Pregunta 5</div>
+              <div class="q-text">En el ejemplo del empleado administrativo del ACA, ¿cuál es el impacto final de procesar correctamente una solicitud?</div>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="q3_5" value="a"> El jefe queda satisfecho con el trabajo</label>
+                <label class="opt"><input type="radio" name="q3_5" value="b"> El sistema informático funciona mejor</label>
+                <label class="opt"><input type="radio" name="q3_5" value="c"> Una familia varada recupera la seguridad y el socio recupera la confianza</label>
+                <label class="opt"><input type="radio" name="q3_5" value="d"> Se ahorra tiempo en el proceso de atención</label>
+              </div>
+              <div class="q-feedback" id="f3q5"></div>
+            </div>
+            <button class="quiz-submit" id="qs3" onclick="submitQuiz(3)">Ver resultados</button>
+            <div class="score-box" id="sc3"></div>
+          </div>
+        </div>
+        <div class="refl" id="refl3" style="display:none">
+          <h4>💭 Reflexión personal</h4>
+          <p>¿Cuáles son los 2 o 3 valores que más te definen en tu trabajo? ¿Cómo se expresan concretamente en las tareas que hacés? Pensá en un momento en que tu trabajo impactó en alguien — puede ser un socio, un cliente, un compañero, alguien de un concesionario, o tu propio equipo.</p>
+          <textarea id="rt3" placeholder="Escribí tu reflexión acá..." rows="3"></textarea>
+        </div>
+        <button class="complete-btn" id="cb3" onclick="completeModule(3)">✓ Completar Módulo 3 y continuar</button>
+        <div class="saved-ok" id="ok3"></div>
+      </div>
+    </div>
+
+    <!-- PANEL 4 -->
+    <div class="panel" id="p4">
+      <div class="mh c4">
+        <div class="mh-ey">Módulo 4 · 15 min</div>
+        <h1>Liderazgo <em>trascendental</em></h1>
+        <p>Los tres tipos de liderazgo según Pérez López y cómo el liderazgo trascendental transforma equipos.</p>
+        <div class="mh-pills"><span class="mp">📖 Teoría</span><span class="mp">⚖️ Comparativa</span><span class="mp">✅ Quiz 5 preguntas</span></div>
+      </div>
+      <div class="mc">
+        <div class="th-block">
+          <div class="th-label">Teoría del liderazgo</div>
+          <div class="th-title">Los <em>tres tipos</em> de liderazgo</div>
+          <p class="th-body">Pérez López propone que, así como hay tres tipos de motivación, hay tres tipos de liderazgo que les corresponden. Lo que distingue a un líder no es su carisma ni sus resultados de corto plazo, sino <strong>qué tipo de motivos activa en quienes lo rodean</strong>.</p>
+        </div>
+        <div class="cc-grid">
+          <div class="cc bl">
+            <h4>Transaccional</h4>
+            <p>Basa su influencia en recompensas y castigos. La relación con el equipo es un intercambio: "hacés lo que te pido y recibís lo que acordamos". Funciona a corto plazo pero genera dependencia y no desarrolla a nadie.</p>
+            <p class="eg">Señal clara: cuando el líder no está, el equipo no funciona.</p>
+          </div>
+          <div class="cc gl">
+            <h4>Transformador</h4>
+            <p>Apela a las motivaciones intrínsecas: inspira, genera entusiasmo, comunica una visión atractiva. Es más poderoso que el transaccional, pero puede volverse manipulación si el foco está en los resultados y no en el desarrollo genuino de las personas.</p>
+            <p class="eg">Señal clara: el equipo sigue al líder porque los entusiasma.</p>
+          </div>
+          <div class="cc gr">
+            <h4>Trascendental</h4>
+            <p>Busca el bien genuino de los colaboradores como fin en sí mismo, no como medio para obtener resultados. No manipula ni controla: desarrolla. Sabe que su éxito real se mide en cuánto crecieron los demás.</p>
+            <p class="eg">Señal clara: el equipo crece y funciona bien aunque el líder no esté.</p>
+          </div>
+        </div>
+        <div class="sec-div"></div>
+        <div class="th-block">
+          <div class="th-title">¿Qué hace <em>concretamente</em> un líder trascendental?</div>
+          <p class="th-body">Pérez López describe cuatro comportamientos que caracterizan al líder trascendental. No son gestos grandiosos: son actitudes cotidianas que acumuladas generan un efecto poderoso.</p>
+        </div>
+        <div class="story">
+          <h4>1. Hace visible el impacto de cada persona</h4>
+          <p>No da por sentado que las personas saben para qué sirve lo que hacen. Toma el tiempo para conectar cada tarea con su consecuencia en el socio, en el equipo, en la institución. "Lo que hiciste hoy permitió que esa familia llegara a destino" es más poderoso que cualquier bono.</p>
+          <div class="moral">→ Convierte tareas en propósito.</div>
+        </div>
+        <div class="story">
+          <h4>2. Delega con confianza genuina</h4>
+          <p>Asigna responsabilidades porque confía en la capacidad de la persona, no para sacarse trabajo. La diferencia es enorme: cuando alguien siente que le confían algo porque creen en ella, su motivación trascendente se activa. Cuando siente que le delegan para descomprimirse, la apaga.</p>
+          <div class="moral">→ La confianza genera compromiso que ningún control puede generar.</div>
+        </div>
+        <div class="story">
+          <h4>3. Desarrolla sin retener</h4>
+          <p>El líder trascendental apoya el crecimiento genuino de su equipo, incluso cuando eso significa que alguien lo supere o se vaya a otro puesto. Su pregunta no es "¿qué necesito yo?" sino "¿qué necesita esta persona para alcanzar su potencial?". Esa actitud construye lealtad más duradera que cualquier retención económica.</p>
+          <div class="moral">→ Quien desarrolla sin retener genera equipos que quieren quedarse.</div>
+        </div>
+        <div class="story">
+          <h4>4. Da el ejemplo</h4>
+          <p>La forma más poderosa de generar motivación trascendente en un equipo es ejemplificarla. Cuando el líder actúa pensando en el bien del equipo sin esperar reconocimiento, eso modela la cultura de forma que ningún manual ni capacitación puede lograr. Las personas imitan lo que ven, no lo que les dicen.</p>
+          <div class="moral">→ El ejemplo es el único lenguaje de liderazgo que no puede fingirse.</div>
+        </div>
+        <div class="ib az">
+          <h4>Importante: el liderazgo trascendental no requiere jerarquía</h4>
+          <p>Cualquier persona puede ejercer liderazgo trascendental desde su lugar, independientemente de su posición en el organigrama. Ayudar a un compañero sin que te lo pidan, dar una devolución honesta y constructiva, poner el bien del equipo por encima del propio en un momento de presión, tratar bien al empleado del concesionario que llama con una duda, cuidar la relación con un cliente aunque no sea "tu" cliente — esos son actos de liderazgo trascendental al alcance de todos.</p>
+        </div>
+
+        <!-- QUIZ 4 -->
+        <div class="quiz">
+          <div class="quiz-h"><h3>Quiz — Módulo 4</h3><span class="qbadge">5 preguntas · mínimo 60%</span></div>
+          <div class="quiz-body" id="qb4">
+            <div class="q-item">
+              <div class="q-num">Pregunta 1</div>
+              <div class="q-text">Según Pérez López, ¿qué distingue fundamentalmente a un líder?</div>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="q4_1" value="a"> Su nivel de carisma y capacidad de comunicación</label>
+                <label class="opt"><input type="radio" name="q4_1" value="b"> Los resultados que obtiene en el corto plazo</label>
+                <label class="opt"><input type="radio" name="q4_1" value="c"> Qué tipo de motivos activa en quienes lo rodean</label>
+                <label class="opt"><input type="radio" name="q4_1" value="d"> Su posición en el organigrama de la organización</label>
+              </div>
+              <div class="q-feedback" id="f4q1"></div>
+            </div>
+            <div class="q-item">
+              <div class="q-num">Pregunta 2</div>
+              <div class="q-text">¿Cuál es la señal clara de que un liderazgo es transaccional?</div>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="q4_2" value="a"> El equipo lo respeta y lo admira genuinamente</label>
+                <label class="opt"><input type="radio" name="q4_2" value="b"> Cuando el líder no está, el equipo no funciona bien</label>
+                <label class="opt"><input type="radio" name="q4_2" value="c"> Los miembros del equipo crecen con rapidez</label>
+                <label class="opt"><input type="radio" name="q4_2" value="d"> Genera mucho entusiasmo en el equipo</label>
+              </div>
+              <div class="q-feedback" id="f4q2"></div>
+            </div>
+            <div class="q-item">
+              <div class="q-num">Pregunta 3</div>
+              <div class="q-text">¿Por qué el liderazgo transformador puede volverse problemático?</div>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="q4_3" value="a"> Porque genera demasiado entusiasmo y distrae al equipo</label>
+                <label class="opt"><input type="radio" name="q4_3" value="b"> Porque puede convertirse en manipulación si el foco está en los resultados y no en el desarrollo genuino</label>
+                <label class="opt"><input type="radio" name="q4_3" value="c"> Porque no produce buenos resultados económicos</label>
+                <label class="opt"><input type="radio" name="q4_3" value="d"> Porque requiere muchos recursos para implementarlo</label>
+              </div>
+              <div class="q-feedback" id="f4q3"></div>
+            </div>
+            <div class="q-item">
+              <div class="q-num">Pregunta 4</div>
+              <div class="q-text">Un líder apoya el crecimiento de un colaborador aunque eso signifique que luego ese colaborador se vaya a otro puesto. ¿Qué tipo de liderazgo demuestra?</div>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="q4_4" value="a"> Transaccional, porque invierte en el colaborador para obtener un retorno</label>
+                <label class="opt"><input type="radio" name="q4_4" value="b"> Transformador, porque genera entusiasmo en el equipo</label>
+                <label class="opt"><input type="radio" name="q4_4" value="c"> Trascendental, porque busca el bien genuino del colaborador como fin en sí mismo</label>
+                <label class="opt"><input type="radio" name="q4_4" value="d"> Ninguno de los tipos mencionados</label>
+              </div>
+              <div class="q-feedback" id="f4q4"></div>
+            </div>
+            <div class="q-item">
+              <div class="q-num">Pregunta 5</div>
+              <div class="q-text">¿Qué afirma el módulo sobre el liderazgo trascendental y la jerarquía?</div>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="q4_5" value="a"> Solo pueden ejercerlo quienes tienen equipos a cargo</label>
+                <label class="opt"><input type="radio" name="q4_5" value="b"> Requiere al menos 5 años en la organización</label>
+                <label class="opt"><input type="radio" name="q4_5" value="c"> Cualquier persona puede ejercerlo desde su lugar, sin importar su posición</label>
+                <label class="opt"><input type="radio" name="q4_5" value="d"> Solo aplica en organizaciones del sector público</label>
+              </div>
+              <div class="q-feedback" id="f4q5"></div>
+            </div>
+            <button class="quiz-submit" id="qs4" onclick="submitQuiz(4)">Ver resultados</button>
+            <div class="score-box" id="sc4"></div>
+          </div>
+        </div>
+        <div class="refl" id="refl4" style="display:none">
+          <h4>💭 Reflexión personal</h4>
+          <p>Pensá en un líder que hayas tenido — formal o informal — que haya ejercido liderazgo trascendental. ¿Qué hacía concretamente que lo diferenciaba? ¿Qué efecto tuvo en tu motivación o en tu desarrollo?</p>
+          <textarea id="rt4" placeholder="Escribí tu reflexión acá..." rows="3"></textarea>
+        </div>
+        <button class="complete-btn" id="cb4" onclick="completeModule(4)">✓ Completar Módulo 4 y continuar</button>
+        <div class="saved-ok" id="ok4"></div>
+      </div>
+    </div>
+
+    <!-- PANEL 5 -->
+    <div class="panel" id="p5">
+      <div class="mh c5">
+        <div class="mh-ey">Módulo 5 · 15 min</div>
+        <h1>El equipo <em>trascendente</em></h1>
+        <p>Cómo se construye y sostiene una cultura de motivación trascendente en un equipo real.</p>
+        <div class="mh-pills"><span class="mp">📖 Síntesis</span><span class="mp">🛠️ Herramientas</span><span class="mp">✅ Quiz final</span></div>
+      </div>
+      <div class="mc">
+        <div class="th-block">
+          <div class="th-label">Integración</div>
+          <div class="th-title">¿Cómo se <em>construye</em> un equipo trascendente?</div>
+          <p class="th-body">La motivación trascendente no es un estado que se alcanza de una vez. Es una <strong>cultura que se construye día a día</strong>, con acciones pequeñas y constantes que refuerzan la orientación hacia el bien de los demás. No requiere grandes gestos: requiere consistencia.</p>
+          <p class="th-body">Pérez López señala que la motivación trascendente grupal puede ser efímera si no se sostiene activamente, pero que una vez que se construyó, es más fácil recuperarla. El desafío está en mantenerla como práctica cotidiana.</p>
+        </div>
+        <div class="sec-div"></div>
+        <div class="th-block">
+          <div class="th-title">Cuatro prácticas que <em>sostienen</em> la motivación trascendente</div>
+        </div>
+        <div class="step">
+          <div class="step-n s1">1</div>
+          <div class="step-b">
+            <h4>Hacer visible el impacto regularmente</h4>
+            <p>Los equipos trascendentes tienen el hábito de conectar sus tareas con sus consecuencias reales. Comparten historias de impacto: "gracias a lo que hiciste hoy, el socio llegó a tiempo", "tu forma de atender al concesionario evitó un problema", "cuando cubriste a tu compañero, el cliente no lo notó — y eso es exactamente lo que queremos". Esa práctica recuerda constantemente para qué existe el trabajo y a quiénes impacta.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n s2">2</div>
+          <div class="step-b">
+            <h4>Reconocer los actos de trascendencia</h4>
+            <p>Cuando alguien en el equipo actúa pensando en el otro —ayuda a un compañero sin que se lo pidan, da la milla extra con un socio difícil, cubre una emergencia— nombrarlo y reconocerlo refuerza la cultura. Lo que se reconoce, se repite.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n s3">3</div>
+          <div class="step-b">
+            <h4>Cuidar la coherencia entre valores y acciones</h4>
+            <p>Nada destruye más rápido la motivación trascendente que la incoherencia: un equipo que dice que valora el servicio pero trata mal a los socios, o que dice que valora el respeto pero tolera el maltrato interno. La coherencia es la base de la confianza que hace posible la trascendencia.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n s4">4</div>
+          <div class="step-b">
+            <h4>Reducir la motivación extrínseca gradualmente</h4>
+            <p>Pérez López señala algo contraintuitivo: cuanto más se refuerza la motivación extrínseca (más controles, más incentivos monetarios, más sanciones), más se debilita la trascendente. Un equipo que solo obedece por miedo o por dinero no tiene espacio para actuar por convicción. El objetivo es crear condiciones donde las personas actúen porque quieren, no porque deben.</p>
+          </div>
+        </div>
+        <div class="sec-div"></div>
+        <div class="th-block">
+          <div class="th-title">El ACA como <em>organización con propósito trascendente</em></div>
+          <p class="th-body">Pocas organizaciones tienen el privilegio de tener una misión tan claramente trascendente como el ACA. Cada persona que trabaja en la institución —sin importar su rol o área— es parte de una cadena que termina en un socio que recibe ayuda cuando más lo necesita.</p>
+          <p class="th-body">Ese potencial ya existe. Lo que este curso propone es hacerlo visible, nombrarlo, y cultivarlo conscientemente en cada interacción cotidiana.</p>
+        </div>
+        <div class="kd">
+          <p>"Cuando las personas actúan motivadas por el bien de los demás, el equipo ya no necesita que lo empujen: se mueve solo. Esa es la diferencia entre un equipo que trabaja y un equipo que transforma."</p>
+          <cite>— Basado en Juan Antonio Pérez López</cite>
+        </div>
+
+        <!-- QUIZ 5 -->
+        <div class="quiz">
+          <div class="quiz-h"><h3>Quiz Final — Módulo 5</h3><span class="qbadge">5 preguntas · mínimo 60%</span></div>
+          <div class="quiz-body" id="qb5">
+            <div class="q-item">
+              <div class="q-num">Pregunta 1</div>
+              <div class="q-text">Según el módulo, ¿qué es la motivación trascendente grupal?</div>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="q5_1" value="a"> Un estado permanente que se alcanza con una sola capacitación</label>
+                <label class="opt"><input type="radio" name="q5_1" value="b"> Una cultura que se construye día a día con acciones pequeñas y constantes</label>
+                <label class="opt"><input type="radio" name="q5_1" value="c"> Un programa de incentivos que la empresa implementa anualmente</label>
+                <label class="opt"><input type="radio" name="q5_1" value="d"> Una característica innata de ciertos equipos que no puede desarrollarse</label>
+              </div>
+              <div class="q-feedback" id="f5q1"></div>
+            </div>
+            <div class="q-item">
+              <div class="q-num">Pregunta 2</div>
+              <div class="q-text">¿Qué efecto tiene reforzar excesivamente la motivación extrínseca según Pérez López?</div>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="q5_2" value="a"> Aumenta simultáneamente la motivación trascendente</label>
+                <label class="opt"><input type="radio" name="q5_2" value="b"> No tiene ningún efecto sobre los otros tipos de motivación</label>
+                <label class="opt"><input type="radio" name="q5_2" value="c"> Debilita la motivación trascendente y el espacio para actuar por convicción</label>
+                <label class="opt"><input type="radio" name="q5_2" value="d"> Solo afecta a los empleados con menos antigüedad</label>
+              </div>
+              <div class="q-feedback" id="f5q2"></div>
+            </div>
+            <div class="q-item">
+              <div class="q-num">Pregunta 3</div>
+              <div class="q-text">¿Por qué es importante reconocer los actos de trascendencia en un equipo?</div>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="q5_3" value="a"> Porque genera obligación en quien recibe el reconocimiento</label>
+                <label class="opt"><input type="radio" name="q5_3" value="b"> Porque lo que se reconoce tiende a repetirse y refuerza la cultura</label>
+                <label class="opt"><input type="radio" name="q5_3" value="c"> Solo sirve para los empleados nuevos que aún no conocen la cultura</label>
+                <label class="opt"><input type="radio" name="q5_3" value="d"> Porque cumple una obligación del reglamento interno</label>
+              </div>
+              <div class="q-feedback" id="f5q3"></div>
+            </div>
+            <div class="q-item">
+              <div class="q-num">Pregunta 4</div>
+              <div class="q-text">¿Qué destruye más rápido la motivación trascendente en un equipo?</div>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="q5_4" value="a"> La falta de recursos materiales</label>
+                <label class="opt"><input type="radio" name="q5_4" value="b"> La incoherencia entre los valores declarados y las acciones reales</label>
+                <label class="opt"><input type="radio" name="q5_4" value="c"> La ausencia de capacitaciones formales</label>
+                <label class="opt"><input type="radio" name="q5_4" value="d"> El exceso de reuniones y coordinaciones</label>
+              </div>
+              <div class="q-feedback" id="f5q4"></div>
+            </div>
+            <div class="q-item">
+              <div class="q-num">Pregunta 5</div>
+              <div class="q-text">¿Cuál de las siguientes opciones NO es una práctica que sostiene la motivación trascendente?</div>
+              <div class="opts">
+                <label class="opt"><input type="radio" name="q5_5" value="a"> Hacer visible el impacto de cada tarea regularmente</label>
+                <label class="opt"><input type="radio" name="q5_5" value="b"> Aumentar los controles y sanciones para garantizar el rendimiento</label>
+                <label class="opt"><input type="radio" name="q5_5" value="c"> Reconocer públicamente los actos de trascendencia</label>
+                <label class="opt"><input type="radio" name="q5_5" value="d"> Cuidar la coherencia entre valores y acciones</label>
+              </div>
+              <div class="q-feedback" id="f5q5"></div>
+            </div>
+            <button class="quiz-submit" id="qs5" onclick="submitQuiz(5)">Ver resultados</button>
+            <div class="score-box" id="sc5"></div>
+          </div>
+        </div>
+        <div class="refl" id="refl5" style="display:none">
+          <h4>💭 Reflexión final del curso</h4>
+          <p>Mirando el curso completo: ¿qué concepto o idea te resultó más reveladora? ¿Qué vas a hacer diferente en tu trabajo a partir de hoy? Sé concreto/a: pensá en una acción específica y posible.</p>
+          <textarea id="rt5" placeholder="Escribí tu reflexión final acá..." rows="4"></textarea>
+        </div>
+        <button class="complete-btn" id="cb5" onclick="completeModule(5)">🎉 Completar el curso</button>
+        <div class="saved-ok" id="ok5"></div>
+        <div class="cert" id="cert5" style="display:none">
+          <div class="star">🏆</div>
+          <h2>¡Curso completado!</h2>
+          <p>Completaste los 5 módulos del curso de Motivación Trascendente.<br>Tu progreso quedó registrado.</p>
+        </div>
+
+        <div id="resultado-final" style="display:none;margin-top:24px;">
+          <div style="background:var(--az);border-radius:16px;padding:24px 28px;margin-bottom:16px;">
+            <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--do2);margin-bottom:8px;">Tu resultado final</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:#fff;" id="rf-nombre">—</div>
+            <div style="font-size:.78rem;color:rgba(255,255,255,.5);margin-top:2px;" id="rf-info">—</div>
+            <div style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap;">
+              <div style="background:rgba(255,255,255,.08);border-radius:10px;padding:10px 16px;text-align:center;">
+                <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--do2);" id="rf-promedio">—</div>
+                <div style="font-size:.68rem;color:rgba(255,255,255,.5);">Promedio quizzes</div>
+              </div>
+              <div style="background:rgba(255,255,255,.08);border-radius:10px;padding:10px 16px;text-align:center;">
+                <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--ve);">5/5</div>
+                <div style="font-size:.68rem;color:rgba(255,255,255,.5);">Módulos completados</div>
+              </div>
+            </div>
+          </div>
+          <div id="rf-modulos"></div>
+          <div style="background:var(--dolt);border-radius:12px;padding:18px 20px;margin-top:12px;border-left:4px solid var(--do);">
+            <div style="font-size:.8rem;font-weight:600;color:var(--az);margin-bottom:5px;">Tu compromiso final</div>
+            <div style="font-size:.86rem;color:var(--gr);line-height:1.7;font-style:italic;" id="rf-compromiso">—</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- PANEL 6: RESULTADOS -->
+    <div class="panel" id="p6">
+      <div class="mh" style="background:linear-gradient(135deg,#1A3A20,#1A5030);">
+        <div class="mh-ey">Tu progreso</div>
+        <h1>Mis <em>Resultados</em></h1>
+        <p>Resumen completo de tu recorrido en el curso de Motivación Trascendente.</p>
+      </div>
+      <div class="mc" id="panel-resultados-content">
+        <div class="ib az" style="text-align:center;padding:24px;">
+          <p style="color:var(--gr2);font-size:.88rem;">Completá al menos un módulo para ver tus resultados aquí.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- DASHBOARD -->
+<div class="screen" id="s-dash">
+  <div class="dh">
+    <div><h1>Panel del Facilitador</h1><p>Motivación Trascendente · Automóvil Club Argentino</p></div>
+    <div class="dacts">
+      <button class="db db-out" onclick="exportCSV()">⬇ CSV</button>
+      <button class="db db-out" onclick="loadDash()">↺ Actualizar</button>
+      <button class="db db-gld" onclick="goScreen('s-login')">← Salir</button>
+    </div>
+  </div>
+  <div class="dbody">
+    <div class="dstats">
+      <div class="dstat"><div class="dn" id="st1">—</div><div class="dl">Participantes</div></div>
+      <div class="dstat"><div class="dn gold" id="st2">—</div><div class="dl">Completaron</div></div>
+      <div class="dstat"><div class="dn grn" id="st3">—</div><div class="dl">Módulos promedio</div></div>
+      <div class="dstat"><div class="dn" id="st4">—</div><div class="dl">Gerencias activas</div></div>
+    </div>
+    <div class="dtbl">
+      <div class="dtbl-h"><h2>Registro de participantes</h2><input class="srch" type="text" placeholder="Buscar..." oninput="filterTbl(this.value)"></div>
+      <div id="tbl"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="ov" id="ov">
+  <div class="mod">
+    <div class="mod-h"><h2 id="mod-t">Detalle</h2><button onclick="closeMod()">✕</button></div>
+    <div class="mod-b" id="mod-b"></div>
+  </div>
+</div>
+
+<script>
+const STAFF = {"19762": {"nombre": "RICCIARDI FAVIO GUSTAVO", "dependencia": "25 DE MAYO-ESTACION", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "19134": {"nombre": "AIZPIRI GASTON HERNAN", "dependencia": "9 DE JULIO-CAMINERA", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "19247": {"nombre": "BONANATA MARA", "dependencia": "ACCESO NORTE 1-CTRO SERVICIAL", "gerencia": "DIVISIONAL CAP Y GBA"}, "19324": {"nombre": "FRACASSI IGNACIO DANIEL", "dependencia": "ACCESO NORTE 1-CTRO SERVICIAL", "gerencia": "DIVISIONAL CAP Y GBA"}, "19668": {"nombre": "PEÑA CAROLINA", "dependencia": "ACCESO NORTE 1-CTRO SERVICIAL", "gerencia": "DIVISIONAL CAP Y GBA"}, "42353": {"nombre": "TOBAR MARIELA SOLEDAD", "dependencia": "ACCESO NORTE 1-CTRO SERVICIAL", "gerencia": "DIVISIONAL CAP Y GBA"}, "42469": {"nombre": "FORTI RICARDO JAVIER", "dependencia": "ACCESO NORTE 1-CTRO SERVICIAL", "gerencia": "DIVISIONAL CAP Y GBA"}, "15313": {"nombre": "D AMARIO JORGE MARCELO", "dependencia": "ADMINIST. DIVIS. C.F. Y G.B.A.", "gerencia": "DIVISIONAL CAP Y GBA"}, "19011": {"nombre": "ROJAS REYNALDO", "dependencia": "ADMINIST. DIVIS. C.F. Y G.B.A.", "gerencia": "DIVISIONAL CAP Y GBA"}, "19100": {"nombre": "DARRICAU FERNANDO JORGE", "dependencia": "ADMINIST. DIVIS. C.F. Y G.B.A.", "gerencia": "DIVISIONAL CAP Y GBA"}, "19206": {"nombre": "ABALO JUAN MANUEL", "dependencia": "ADMINIST. DIVIS. C.F. Y G.B.A.", "gerencia": "DIVISIONAL CAP Y GBA"}, "19368": {"nombre": "ANTELO NANCY KARINA", "dependencia": "ADMINIST. DIVIS. C.F. Y G.B.A.", "gerencia": "DIVISIONAL CAP Y GBA"}, "19502": {"nombre": "ORTIZ DIEGO RAFAEL", "dependencia": "ADMINIST. DIVIS. C.F. Y G.B.A.", "gerencia": "DIVISIONAL CAP Y GBA"}, "19677": {"nombre": "GRIMOLDI VELAZQUEZ AVILA NAHIARA ELIZABETH", "dependencia": "ADMINIST. DIVIS. C.F. Y G.B.A.", "gerencia": "DIVISIONAL CAP Y GBA"}, "41724": {"nombre": "DONADIO DEMIAN", "dependencia": "ADMINIST. DIVIS. C.F. Y G.B.A.", "gerencia": "DIVISIONAL CAP Y GBA"}, "42598": {"nombre": "ANDRADA LUCAS HECTOR", "dependencia": "ADMINIST. DIVIS. C.F. Y G.B.A.", "gerencia": "DIVISIONAL CAP Y GBA"}, "42885": {"nombre": "MANZANARES EXEQUIEL", "dependencia": "ADMINIST. DIVIS. C.F. Y G.B.A.", "gerencia": "DIVISIONAL CAP Y GBA"}, "16858": {"nombre": "LOPEZ MANUEL ERNESTO", "dependencia": "ADMINIST. DIVIS. MAR DEL PLATA", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "17527": {"nombre": "DE LA FUENTE DARIO JAVIER", "dependencia": "ADMINIST. DIVIS. MAR DEL PLATA", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "19401": {"nombre": "VIDELA VALERIA", "dependencia": "ADMINIST. DIVIS. MAR DEL PLATA", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "19406": {"nombre": "MATOS RODRIGUEZ SEBASTIAN", "dependencia": "ADMINIST. DIVIS. MAR DEL PLATA", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "17357": {"nombre": "FANDIÑO ROSENDO ALBERTO", "dependencia": "ADMINIST. DIVIS. NEUQUEN", "gerencia": "DIVISIONAL NEUQUEN"}, "19340": {"nombre": "MANCA GONZALO DANIEL", "dependencia": "ADMINIST. DIVIS. NEUQUEN", "gerencia": "DIVISIONAL NEUQUEN"}, "19760": {"nombre": "GRELLET MAURICIO", "dependencia": "ADMINIST. DIVIS. NEUQUEN", "gerencia": "DIVISIONAL NEUQUEN"}, "42835": {"nombre": "MELIVILO MIGUEL ALEJANDRO", "dependencia": "ADMINIST. DIVIS. NEUQUEN", "gerencia": "DIVISIONAL NEUQUEN"}, "17831": {"nombre": "TESSINO JOSE EDUARDO", "dependencia": "ADMINISTRACION DIV. CORDOBA", "gerencia": "DIVISIONAL CORDOBA"}, "19277": {"nombre": "GEMO ALONSO MARIA VALERIA", "dependencia": "ADMINISTRACION DIV. CORDOBA", "gerencia": "DIVISIONAL CORDOBA"}, "19408": {"nombre": "ROTUNDO JOSE LUIS", "dependencia": "ADMINISTRACION DIV. CORDOBA", "gerencia": "DIVISIONAL CORDOBA"}, "21739": {"nombre": "MARTINEZ RANDAZZO NESTOR NICOLAS", "dependencia": "ADMINISTRACION DIV. CORDOBA", "gerencia": "DIVISIONAL CORDOBA"}, "42501": {"nombre": "PASSO JUAN MANUEL", "dependencia": "ADMINISTRACION DIV. CORDOBA", "gerencia": "DIVISIONAL CORDOBA"}, "19205": {"nombre": "ABALO MARCELO ADRIAN", "dependencia": "ADMINISTRACION DIV. ROSARIO", "gerencia": "DIVISIONAL ROSARIO"}, "19244": {"nombre": "STACUL FLAVIO LEONARDO", "dependencia": "ADMINISTRACION DIV. ROSARIO", "gerencia": "DIVISIONAL ROSARIO"}, "19312": {"nombre": "PALOS MARIA FERNANDA", "dependencia": "ADMINISTRACION DIV. ROSARIO", "gerencia": "DIVISIONAL ROSARIO"}, "42823": {"nombre": "CORREA LEANDRO JAVIER MODESTO", "dependencia": "ADMINISTRACION DIV. ROSARIO", "gerencia": "DIVISIONAL ROSARIO"}, "19394": {"nombre": "TOPALDA MARTA SILVINA", "dependencia": "ADMINISTRACION DIV.TRELEW", "gerencia": "DIVISIONAL TRELEW"}, "19500": {"nombre": "GUAJARDO LUCAS MAXIMILIANO", "dependencia": "ADMINISTRACION DIV.TRELEW", "gerencia": "DIVISIONAL TRELEW"}, "42587": {"nombre": "IRRIBARRA LUCAS DAMIAN", "dependencia": "ADMINISTRACION DIV.TRELEW", "gerencia": "DIVISIONAL TRELEW"}, "19664": {"nombre": "GRIMALD SEBASTIAN", "dependencia": "ADMINISTRACION DIV.TUCUMAN", "gerencia": "DIVISIONAL TUCUMAN"}, "41876": {"nombre": "SUAREZ TRAGLIO GUSTAVO JAVIER", "dependencia": "ADMINISTRACION DIV.TUCUMAN", "gerencia": "DIVISIONAL TUCUMAN"}, "42493": {"nombre": "ABRAHAM VIVIANA SOLEDAD", "dependencia": "ADMINISTRACION DIV.TUCUMAN", "gerencia": "DIVISIONAL TUCUMAN"}, "19097": {"nombre": "CAÑIZAREZ GRACIELA VIVIANA", "dependencia": "ALMAGRO", "gerencia": "DIVISIONAL CAP Y GBA"}, "19225": {"nombre": "MORZILLI ADRIANA CRISTINA", "dependencia": "ALMAGRO", "gerencia": "DIVISIONAL CAP Y GBA"}, "19429": {"nombre": "LOPEZ NADAL ALEJANDRO E", "dependencia": "ALMAGRO", "gerencia": "DIVISIONAL CAP Y GBA"}, "19444": {"nombre": "VILLALBA CARLOS MAXIMILIANO", "dependencia": "ALMAGRO", "gerencia": "DIVISIONAL CAP Y GBA"}, "19528": {"nombre": "OLIVERA SERGIO ALEJANDRO", "dependencia": "ALMAGRO", "gerencia": "DIVISIONAL CAP Y GBA"}, "19594": {"nombre": "GATTUSO VIRGINIA ANDREA", "dependencia": "ALMAGRO", "gerencia": "DIVISIONAL CAP Y GBA"}, "19637": {"nombre": "EZCURRA AGUSTIN ANDRES", "dependencia": "ALMAGRO", "gerencia": "DIVISIONAL CAP Y GBA"}, "41898": {"nombre": "MANDIN MIRIAM SALOME", "dependencia": "ALMAGRO", "gerencia": "DIVISIONAL CAP Y GBA"}, "17868": {"nombre": "LUGO CARLOS EDUARDO", "dependencia": "AVELLANEDA OFICINA", "gerencia": "DIVISIONAL CAP Y GBA"}, "19174": {"nombre": "DE LUCA ROXANA MARCELA", "dependencia": "AVELLANEDA OFICINA", "gerencia": "DIVISIONAL CAP Y GBA"}, "19692": {"nombre": "SDRUBOLINI LUANA CORINA", "dependencia": "AVELLANEDA OFICINA", "gerencia": "DIVISIONAL CAP Y GBA"}, "42336": {"nombre": "PRIETO MARIA JULIETA", "dependencia": "AVELLANEDA OFICINA", "gerencia": "DIVISIONAL CAP Y GBA"}, "42154": {"nombre": "LOMBARDERO ANDRÉS ALBERTO", "dependencia": "AVELLANEDA OFICINA", "gerencia": "DIVISIONAL CAP Y GBA"}, "19261": {"nombre": "OVIEDO MARIA CANDELA", "dependencia": "AVELLANEDA-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "19607": {"nombre": "BOCCA CRISTIAN SEBASTIAN", "dependencia": "BAHIA BLANCA-ESTACION", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "42367": {"nombre": "DIAZ PABLO XAVIER", "dependencia": "BAHIA BLANCA-ESTACION", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "42778": {"nombre": "ALVAREZ WEIS ROCIO LUJAN", "dependencia": "BAHIA BLANCA-ESTACION", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "42517": {"nombre": "CABRERA AXEL AGUSTIN", "dependencia": "BARRACAS-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "19133": {"nombre": "DE MESTICO PATRICIA GRACIELA", "dependencia": "BELGRANO-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "19572": {"nombre": "BOLAÑO MARIA BELEN", "dependencia": "BELGRANO-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "19624": {"nombre": "ALVAREZ GABRIEL HERNAN", "dependencia": "BELGRANO-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "42132": {"nombre": "BERDOTE MARIANA ALEJANDRA", "dependencia": "BELGRANO-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "42790": {"nombre": "PEREIRA HECTOR DANIEL", "dependencia": "BERNARDO DE IRIGOYEN-EST. Y MOTEL", "gerencia": "DIVISIONAL ROSARIO"}, "19333": {"nombre": "CORIZA PAOLA CAROLINA", "dependencia": "BIBLIOTECA", "gerencia": "SERVICIOS AL SOCIO Y ACANET"}, "42331": {"nombre": "ALVARADO LAURA ELIZABETH", "dependencia": "CABALLITO-OFICINA", "gerencia": "DIVISIONAL CAP Y GBA"}, "41737": {"nombre": "THOMAS ESTEBAN MATIAS", "dependencia": "CAFAYATE-ESTACION", "gerencia": "DIVISIONAL TUCUMAN"}, "42793": {"nombre": "OCAMPO DALMA SOLEDAD", "dependencia": "CALEU CALEU-ESTACION Y MOTEL", "gerencia": "DIVISIONAL NEUQUEN"}, "42201": {"nombre": "SQUADRONI JUAN EMILIANO", "dependencia": "CALIDAD EN DEPENDENCIA", "gerencia": "DIVISIONAL NEUQUEN"}, "19223": {"nombre": "BUITRON DAMIAN", "dependencia": "CAMINO PARQUE BUEN AYRE OESTE", "gerencia": "DIVISIONAL CAP Y GBA"}, "42633": {"nombre": "CABAÑAS FLORENCIA DANIELA", "dependencia": "CAT", "gerencia": "SERVICIOS AL SOCIO Y ACANET"}, "42713": {"nombre": "FERREIRO MIASNIK CAMILA SALOME", "dependencia": "CAT", "gerencia": "SERVICIOS AL SOCIO Y ACANET"}, "42761": {"nombre": "BENITEZ PEDEMONTE ARIADNA ITZEL", "dependencia": "CATAMARCA-ESTACION", "gerencia": "DIVISIONAL TUCUMAN"}, "42783": {"nombre": "SAAD YASMIN LILEN", "dependencia": "CENTRO DE ATENCION DE SINIESTROS", "gerencia": "SERVICIOS AL SOCIO Y ACANET"}, "42857": {"nombre": "BARBOSA GISELA YANINA", "dependencia": "CERRO DE LAS ROSAS-OFICINA", "gerencia": "DIVISIONAL CORDOBA"}, "42750": {"nombre": "CAÑELLAS GUSTAVO MARTIN", "dependencia": "CHASCOMUS-ESTACION", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "42834": {"nombre": "MONTIVERO TAMARA BEATRIZ", "dependencia": "CHEPES-CAMINERA Y MOTEL", "gerencia": "DIVISIONAL TUCUMAN"}, "42200": {"nombre": "MORA ALEJANDRO MATIAS", "dependencia": "CIPOLLETTI-ESTACION", "gerencia": "DIVISIONAL NEUQUEN"}, "42390": {"nombre": "RUSSO GERMAN NICOLAS", "dependencia": "CIPOLLETTI-ESTACION", "gerencia": "DIVISIONAL NEUQUEN"}, "19146": {"nombre": "NICHLISON SERGIO MARTIN", "dependencia": "COBRANZAS SOCIOS-SEDE CENTRAL", "gerencia": "DIVISIONAL CAP Y GBA"}, "19203": {"nombre": "CARBONE ROMINA SOLEDAD", "dependencia": "COBRANZAS SOCIOS-SEDE CENTRAL", "gerencia": "DIVISIONAL CAP Y GBA"}, "19219": {"nombre": "UNANUE ALICIA CAROLINA", "dependencia": "COBRANZAS SOCIOS-SEDE CENTRAL", "gerencia": "DIVISIONAL CAP Y GBA"}, "41837": {"nombre": "TEVEZ MARIANA ANABEL", "dependencia": "COBRANZAS SOCIOS-SEDE CENTRAL", "gerencia": "DIVISIONAL CAP Y GBA"}, "41839": {"nombre": "VELOSO JORGELINA IVANA", "dependencia": "COBRANZAS SOCIOS-SEDE CENTRAL", "gerencia": "DIVISIONAL CAP Y GBA"}, "41859": {"nombre": "OLIVA GUIDO JONATHAN", "dependencia": "COBRANZAS SOCIOS-SEDE CENTRAL", "gerencia": "DIVISIONAL CAP Y GBA"}, "42239": {"nombre": "FEIJOO MAITE MARIANA", "dependencia": "COBRANZAS SOCIOS-SEDE CENTRAL", "gerencia": "DIVISIONAL CAP Y GBA"}, "42439": {"nombre": "FALBO CAMILA VICTORIA", "dependencia": "COBRANZAS SOCIOS-SEDE CENTRAL", "gerencia": "DIVISIONAL CAP Y GBA"}, "42455": {"nombre": "ZIEGLER ORNELLA MARIA", "dependencia": "COBRANZAS SOCIOS-SEDE CENTRAL", "gerencia": "DIVISIONAL CAP Y GBA"}, "42492": {"nombre": "MANSILLA NOELIA SOLEDAD", "dependencia": "COBRANZAS SOCIOS-SEDE CENTRAL", "gerencia": "DIVISIONAL CAP Y GBA"}, "42817": {"nombre": "VELEZ RAFASQUINO ALAN AMILCAR", "dependencia": "COBRANZAS SOCIOS-SEDE CENTRAL", "gerencia": "DIVISIONAL CAP Y GBA"}, "42899": {"nombre": "LOPRESTO CARLOS GERMAN", "dependencia": "COBRANZAS SOCIOS-SEDE CENTRAL", "gerencia": "DIVISIONAL CAP Y GBA"}, "42870": {"nombre": "FORLANI CARGNELUTTI FIORELLA AILEN", "dependencia": "COL. 25 DE MAYO-CAMINERA/MOTEL", "gerencia": "DIVISIONAL NEUQUEN"}, "42874": {"nombre": "PARADI PABLO RAFAEL", "dependencia": "COMODORO RIVADAVIA-ESTACION", "gerencia": "DIVISIONAL TRELEW"}, "15024": {"nombre": "CEVEY OSCAR ANTONIO", "dependencia": "CONCEPCION DEL URUGUAY-EST.", "gerencia": "DIVISIONAL ROSARIO"}, "19267": {"nombre": "CERESA FRANCO DANIEL", "dependencia": "CONCORDIA-ESTACION", "gerencia": "DIVISIONAL ROSARIO"}, "19359": {"nombre": "HUCK AUGUSTO GABRIEL", "dependencia": "CORDOBA-CENTRO SERVICIAL", "gerencia": "DIVISIONAL CORDOBA"}, "14669": {"nombre": "PEREGRIN DANIEL RICARDO", "dependencia": "CORDOBA-ESTACION", "gerencia": "DIVISIONAL CORDOBA"}, "17384": {"nombre": "MARTINEZ MANUEL", "dependencia": "CORDOBA-ESTACION", "gerencia": "DIVISIONAL CORDOBA"}, "17836": {"nombre": "BAQUEIRO GUSTAVO CESAR", "dependencia": "CORDOBA-ESTACION", "gerencia": "DIVISIONAL CORDOBA"}, "21712": {"nombre": "PIÑERA CLAUDIA ANDREA", "dependencia": "CORDOBA-ESTACION", "gerencia": "DIVISIONAL CORDOBA"}, "21746": {"nombre": "PEREYRA NATALIA MARIA", "dependencia": "CORDOBA-ESTACION", "gerencia": "DIVISIONAL CORDOBA"}, "41854": {"nombre": "MARQUEZ CARLOS FEDERICO", "dependencia": "CORDOBA-ESTACION", "gerencia": "DIVISIONAL CORDOBA"}, "19573": {"nombre": "GONZALEZ MARIANO ALBERTO", "dependencia": "CORDOBA-HOTEL", "gerencia": "DIVISIONAL CORDOBA"}, "21523": {"nombre": "NIEVAS RODOLFO MAXIMO", "dependencia": "CORDOBA-HOTEL", "gerencia": "DIVISIONAL CORDOBA"}, "21574": {"nombre": "BUSTOS ANGEL ERASMO", "dependencia": "CORDOBA-HOTEL", "gerencia": "DIVISIONAL CORDOBA"}, "21711": {"nombre": "LUDUEÑA MARISA DEL VALLE", "dependencia": "CORDOBA-HOTEL", "gerencia": "DIVISIONAL CORDOBA"}, "21730": {"nombre": "ROSALES MARISA GABRIELA", "dependencia": "CORDOBA-HOTEL", "gerencia": "DIVISIONAL CORDOBA"}, "21740": {"nombre": "MURUA BEATRIZ ALICIA", "dependencia": "CORDOBA-HOTEL", "gerencia": "DIVISIONAL CORDOBA"}, "21742": {"nombre": "SCALABRELLI MARCOS", "dependencia": "CORDOBA-HOTEL", "gerencia": "DIVISIONAL CORDOBA"}, "21750": {"nombre": "RODRIGUEZ MIRIAM MARA", "dependencia": "CORDOBA-HOTEL", "gerencia": "DIVISIONAL CORDOBA"}, "21751": {"nombre": "MANZANELLI JUAN JOSE", "dependencia": "CORDOBA-HOTEL", "gerencia": "DIVISIONAL CORDOBA"}, "21752": {"nombre": "MANZANELLI CARLOS ANTONIO", "dependencia": "CORDOBA-HOTEL", "gerencia": "DIVISIONAL CORDOBA"}, "21758": {"nombre": "CABRERA ANGELA LUCIANA", "dependencia": "CORDOBA-HOTEL", "gerencia": "DIVISIONAL CORDOBA"}, "41878": {"nombre": "CORONA LINA VANINA", "dependencia": "CORDOBA-HOTEL", "gerencia": "DIVISIONAL CORDOBA"}, "42155": {"nombre": "VILTA SONIA CARINA", "dependencia": "CORDOBA-HOTEL", "gerencia": "DIVISIONAL CORDOBA"}, "42341": {"nombre": "SALDAÑO MARIA EUGENIA", "dependencia": "CORDOBA-HOTEL", "gerencia": "DIVISIONAL CORDOBA"}, "42418": {"nombre": "MULE LUCAS SANTIAGO", "dependencia": "CORDOBA-HOTEL", "gerencia": "DIVISIONAL CORDOBA"}, "42528": {"nombre": "ALTAMIRANO GLADYS MABEL", "dependencia": "CORDOBA-HOTEL", "gerencia": "DIVISIONAL CORDOBA"}, "42726": {"nombre": "PEREA ROMINA ELIZABETH", "dependencia": "CORDOBA-HOTEL", "gerencia": "DIVISIONAL CORDOBA"}, "42727": {"nombre": "VELAZQUEZ GISEL SILVANA", "dependencia": "CORDOBA-HOTEL", "gerencia": "DIVISIONAL CORDOBA"}, "42729": {"nombre": "ACOSTA JULIETA LOURDES", "dependencia": "CORDOBA-HOTEL", "gerencia": "DIVISIONAL CORDOBA"}, "42865": {"nombre": "GIACHE GONZALO DANIEL", "dependencia": "CORDOBA-HOTEL", "gerencia": "DIVISIONAL CORDOBA"}, "19612": {"nombre": "LEIVA DANTE DANIEL", "dependencia": "CORRIENTES-ESTACION", "gerencia": "DIVISIONAL ROSARIO"}, "42831": {"nombre": "FERNANDEZ PARE MARIA BELEN", "dependencia": "CORRIENTES-ESTACION", "gerencia": "DIVISIONAL ROSARIO"}, "42751": {"nombre": "RODRIGUEZ ESQUERCIA MARIA ADRIANA", "dependencia": "CURUZU CUATIA-ESTACION", "gerencia": "DIVISIONAL ROSARIO"}, "19487": {"nombre": "SPERANZA MARIA ELEONORA", "dependencia": "DOLORES-CENTRO SERVICIAL", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "19305": {"nombre": "FERNANDEZ VALERIA LORENA", "dependencia": "DON TORCUATO-OFICINA", "gerencia": "DIVISIONAL CAP Y GBA"}, "19439": {"nombre": "BIERSCHUVALL GABRIEL", "dependencia": "DON TORCUATO-OFICINA", "gerencia": "DIVISIONAL CAP Y GBA"}, "19706": {"nombre": "GALLEGO LUDMILA DANIELA", "dependencia": "EL BOLSON-ESTACION", "gerencia": "DIVISIONAL NEUQUEN"}, "42617": {"nombre": "OYARZUN LUIS FERNANDO", "dependencia": "EL BOLSON-ESTACION", "gerencia": "DIVISIONAL NEUQUEN"}, "42016": {"nombre": "AZAR KARINA ELIZABET", "dependencia": "EL CALAFATE- HOTEL", "gerencia": "DIVISIONAL TRELEW"}, "42021": {"nombre": "REBOLLO PABLO ANTONIO", "dependencia": "EL CALAFATE- HOTEL", "gerencia": "DIVISIONAL TRELEW"}, "42138": {"nombre": "VALLEJOS VEIZAGA RILMA", "dependencia": "EL CALAFATE- HOTEL", "gerencia": "DIVISIONAL TRELEW"}, "42139": {"nombre": "FLORES ENRIQUEZ CLAUDIA NOEMI DEL VALLE", "dependencia": "EL CALAFATE- HOTEL", "gerencia": "DIVISIONAL TRELEW"}, "42190": {"nombre": "BRAC MARICEL ELIZABETH", "dependencia": "EL CALAFATE- HOTEL", "gerencia": "DIVISIONAL TRELEW"}, "42235": {"nombre": "MOTTA NATASHA FLORENCIA", "dependencia": "EL CALAFATE- HOTEL", "gerencia": "DIVISIONAL TRELEW"}, "42247": {"nombre": "PUCA GUILLERMINA", "dependencia": "EL CALAFATE- HOTEL", "gerencia": "DIVISIONAL TRELEW"}, "42303": {"nombre": "RUEDA FLORENCIA ALEJANDRA", "dependencia": "EL CALAFATE- HOTEL", "gerencia": "DIVISIONAL TRELEW"}, "42395": {"nombre": "ALONSO GUILLERMO ANDRES", "dependencia": "EL CALAFATE- HOTEL", "gerencia": "DIVISIONAL TRELEW"}, "42662": {"nombre": "FRAGA SANTIAGO RUBEN", "dependencia": "EL CALAFATE- HOTEL", "gerencia": "DIVISIONAL TRELEW"}, "42692": {"nombre": "FIGUEROA ROJAS MARIBEL", "dependencia": "EL CALAFATE- HOTEL", "gerencia": "DIVISIONAL TRELEW"}, "42700": {"nombre": "CITTA JUAN CARLOS", "dependencia": "EL CALAFATE- HOTEL", "gerencia": "DIVISIONAL TRELEW"}, "42776": {"nombre": "CHILESKI MARIO FEDERICO MATIAS", "dependencia": "ELDORADO-ESTACION", "gerencia": "DIVISIONAL ROSARIO"}, "19370": {"nombre": "LUNA MARIA ANGELICA", "dependencia": "ESCUELA DE CONDUCCIÓN", "gerencia": "DIVISIONAL CAP Y GBA"}, "42454": {"nombre": "CAPELLINO SANTIAGO LUIS", "dependencia": "ESCUELA DE CONDUCCIÓN", "gerencia": "DIVISIONAL CAP Y GBA"}, "19508": {"nombre": "POLIMENI SABRINA PATRICIA", "dependencia": "ESCUELA DE CONDUCCIÓN", "gerencia": "DIVISIONAL CAP Y GBA"}, "42536": {"nombre": "FRANCO MARIANO DANIEL", "dependencia": "ESCUELA DE CONDUCCIÓN", "gerencia": "DIVISIONAL CAP Y GBA"}, "42861": {"nombre": "CACERES SANDRA EVANGELINA", "dependencia": "ESQUEL-ESTACION", "gerencia": "DIVISIONAL TRELEW"}, "19122": {"nombre": "CHENLO ARIEL SEBASTIAN", "dependencia": "FLORES-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "19164": {"nombre": "PEREZ MARCELO NESTOR", "dependencia": "FLORES-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "19258": {"nombre": "BOSCH PATRICIA", "dependencia": "FLORES-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "19714": {"nombre": "JORDAN JUAN MANUEL", "dependencia": "FLORES-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "42348": {"nombre": "CEJAS MARA SOLEDAD", "dependencia": "FLORES-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "42597": {"nombre": "PORTILLO RAUL EZEQUIEL", "dependencia": "FORMOSA-CENTRO SERVICIAL", "gerencia": "DIVISIONAL ROSARIO"}, "42699": {"nombre": "DIAZ LEANDRO OMAR", "dependencia": "FORMOSA-CENTRO SERVICIAL", "gerencia": "DIVISIONAL ROSARIO"}, "42756": {"nombre": "QUIROGA ALMA LAUREANA", "dependencia": "GENERAL ROCA-OFIC. PLAN A.C.A.", "gerencia": "DIVISIONAL NEUQUEN"}, "19580": {"nombre": "ALVAREZ MARTINA LUCIANA", "dependencia": "GERENCIA GENERAL", "gerencia": "DIVISIONAL CAP Y GBA"}, "17278": {"nombre": "BENITEZ JULIO MARIO", "dependencia": "GUALEGUAYCHU-ESTACION", "gerencia": "DIVISIONAL ROSARIO"}, "19184": {"nombre": "GARCIA MARIA DEL CARMEN", "dependencia": "INGENIERO MASCHWITZ-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "19699": {"nombre": "BURGOS GUILLERMO JAVIER", "dependencia": "INGENIERO MASCHWITZ-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "41903": {"nombre": "ZABALO EDUARDO MARTIN", "dependencia": "INGENIERO MASCHWITZ-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "42745": {"nombre": "PAEZ SANCHEZ JESUS MAXIMILIANO", "dependencia": "JACHAL-ESTACION", "gerencia": "DIVISIONAL CORDOBA"}, "17560": {"nombre": "BASSO NESTOR DANIEL", "dependencia": "JUNIN-ESTACION", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "19396": {"nombre": "MOOR ROCIO SOLEDAD", "dependencia": "JUNIN-ESTACION", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "17719": {"nombre": "DATO ALFREDO", "dependencia": "LA FALDA-ESTACION", "gerencia": "DIVISIONAL CORDOBA"}, "41740": {"nombre": "BUSSOLINI SEBASTIAN MAURICIO", "dependencia": "LA FALDA-ESTACION", "gerencia": "DIVISIONAL CORDOBA"}, "19039": {"nombre": "REY SILVIO ALEJANDRO", "dependencia": "LA PLATA-CENTRO SERVICIAL", "gerencia": "DIVISIONAL CAP Y GBA"}, "19361": {"nombre": "SCOTTO FERNANDO ANIBAL", "dependencia": "LA PLATA-CENTRO SERVICIAL", "gerencia": "DIVISIONAL CAP Y GBA"}, "42484": {"nombre": "TUFANO JAVIER EDUARDO", "dependencia": "LA PLATA-CENTRO SERVICIAL", "gerencia": "DIVISIONAL CAP Y GBA"}, "42833": {"nombre": "SEOANE DIEGO GONZALO", "dependencia": "LA PLATA-CENTRO SERVICIAL", "gerencia": "DIVISIONAL CAP Y GBA"}, "42836": {"nombre": "LISSARRAGUE INES", "dependencia": "LA PLATA-CENTRO SERVICIAL", "gerencia": "DIVISIONAL CAP Y GBA"}, "17101": {"nombre": "NIETO LETICIA MABEL", "dependencia": "LA PLATA-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "42489": {"nombre": "BUCETTA JORGE ESEQUIEL", "dependencia": "LA PLATA-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "42863": {"nombre": "ORELLANO WALTER MARINO", "dependencia": "LA PLATA-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "42571": {"nombre": "PALACIOS ELENA ALEJANDRA", "dependencia": "LA RIOJA-ESTACION", "gerencia": "DIVISIONAL TUCUMAN"}, "42829": {"nombre": "MORENO CARLOS DAVID", "dependencia": "LA RIOJA-ESTACION", "gerencia": "DIVISIONAL TUCUMAN"}, "17523": {"nombre": "ZORMAN LUIS ALEJANDRO", "dependencia": "LANUS-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "19125": {"nombre": "RIBOLINI MARIA VALERIA", "dependencia": "LANUS-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "19157": {"nombre": "DETRANO NATALIA PATRICIA", "dependencia": "LANUS-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "19348": {"nombre": "GARCIA KARINA ANDREA VALERIA", "dependencia": "LANUS-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "19523": {"nombre": "CONDO DANIELA VERONICA", "dependencia": "LANUS-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "19403": {"nombre": "OLIVERA ANGEL MARIANO", "dependencia": "LINCOLN-ESTACION", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "19739": {"nombre": "AGUERO ADRIANA DEL CARMEN", "dependencia": "LINCOLN-ESTACION", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "19527": {"nombre": "SAAVEDRA JORGELINA", "dependencia": "LUJAN-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "42113": {"nombre": "BILOTTO MARIA EMILIA", "dependencia": "LUJAN-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "42233": {"nombre": "MIÑO JUAN CARLOS TOMAS", "dependencia": "LUJAN-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "17657": {"nombre": "MONTERO EDUARDO ALFREDO", "dependencia": "MAR DEL PLATA/COLON-CTRO. SERV", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "19274": {"nombre": "SPOGNARDI JORGE ALBERTO", "dependencia": "MAR DEL PLATA/COLON-CTRO. SERV", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "19415": {"nombre": "PAGANO SAMANTA DEBORA", "dependencia": "MAR DEL PLATA/COLON-CTRO. SERV", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "19506": {"nombre": "MOLINARI ANDRES", "dependencia": "MAR DEL PLATA/COLON-CTRO. SERV", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "19570": {"nombre": "TORRES ANA MARIELA", "dependencia": "MAR DEL PLATA/COLON-CTRO. SERV", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "41868": {"nombre": "BUFFAGNI MARTIN ALEJANDRO", "dependencia": "MAR DEL PLATA/COLON-CTRO. SERV", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "42479": {"nombre": "LLANES MARIA CARLA", "dependencia": "MAR DEL PLATA/COLON-CTRO. SERV", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "42749": {"nombre": "CEPEDA SANTIAGO", "dependencia": "MAR DEL PLATA/COLON-CTRO. SERV", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "42826": {"nombre": "GARCIA CABRAL FERNANDO", "dependencia": "MAR DEL PLATA/COLON-CTRO. SERV", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "42856": {"nombre": "LERNER IGNACIO", "dependencia": "MAR DEL PLATA/COLON-CTRO. SERV", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "42194": {"nombre": "PETROPULOS FERNANDO MARCELO", "dependencia": "MAR DEL PLATA/INDEPENDEN.-EST.", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "42293": {"nombre": "FERRER CARLOS JAVIER", "dependencia": "MAR DEL PLATA/INDEPENDEN.-EST.", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "19158": {"nombre": "CALABRESE VALERIA VERONICA", "dependencia": "MAR DEL PLATA/PTA.MOGOTES-BALN", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "42480": {"nombre": "ATTENA CAROLINA ANDREA", "dependencia": "MAR DEL PLATA/PTA.MOGOTES-BALN", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "42686": {"nombre": "PICONE MARIA SOFIA", "dependencia": "MAR DEL PLATA/PTA.MOGOTES-BALN", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "42478": {"nombre": "RAMOS SEBASTIAN ARIEL", "dependencia": "MAR DEL PLATA/PTA.MOGOTES-BALN", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "19459": {"nombre": "MELKIS GISELA ROMINA", "dependencia": "MARKETING Y MEDIOS", "gerencia": "SERVICIOS AL SOCIO Y ACANET"}, "19119": {"nombre": "BUSTOS  SILVINA MARIANA", "dependencia": "MARKETING Y MEDIOS", "gerencia": "SERVICIOS AL SOCIO Y ACANET"}, "19388": {"nombre": "SOLFANELLI SANDRA CECILIA", "dependencia": "MENDOZA-CENTRO SERVICIAL", "gerencia": "DIVISIONAL CORDOBA"}, "42323": {"nombre": "HORNILLA VALDEZ JAVIER NICOLAS", "dependencia": "MENDOZA-ESTACION", "gerencia": "DIVISIONAL CORDOBA"}, "42387": {"nombre": "FLORES ADRIAN ESTEBAN", "dependencia": "MENDOZA-ESTACION", "gerencia": "DIVISIONAL CORDOBA"}, "42488": {"nombre": "PEREZ CANGIANI JUAN PABLO", "dependencia": "MENDOZA-ESTACION", "gerencia": "DIVISIONAL CORDOBA"}, "41896": {"nombre": "FIORELLI JUAN ESTEBAN", "dependencia": "MERCEDES-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "42070": {"nombre": "BARBIERI FEDERICO", "dependencia": "MERCEDES-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "41785": {"nombre": "BENITEZ NOELIA SOLEDAD", "dependencia": "MIRAMAR-ESTACION", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "19643": {"nombre": "ROGGERO MARIA SOLEDAD", "dependencia": "MORON-OFICINA", "gerencia": "DIVISIONAL CAP Y GBA"}, "19750": {"nombre": "GANGEMI ELIANA", "dependencia": "MORON-OFICINA", "gerencia": "DIVISIONAL CAP Y GBA"}, "42106": {"nombre": "MARTINEZ MARIA CECILIA GRISELDA", "dependencia": "MORON-OFICINA", "gerencia": "DIVISIONAL CAP Y GBA"}, "19646": {"nombre": "GALLO MATARRESE SABRINA VERONICA", "dependencia": "MORON-OFICINA", "gerencia": "DIVISIONAL CAP Y GBA"}, "19505": {"nombre": "RETONDADO FABIO LEO", "dependencia": "MUSEO", "gerencia": "DIVISIONAL CAP Y GBA"}, "19604": {"nombre": "BAYLEY GERMAN", "dependencia": "NECOCHEA-ESTACION", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "19351": {"nombre": "DE GOYCOECHEA ANA MARIA", "dependencia": "NEUQUEN-ESTACION", "gerencia": "DIVISIONAL NEUQUEN"}, "19602": {"nombre": "TORRES MATIAS DAMIAN", "dependencia": "NEUQUEN-ESTACION", "gerencia": "DIVISIONAL NEUQUEN"}, "41818": {"nombre": "SAAVEDRA MARIA CECILIA", "dependencia": "NEUQUEN-ESTACION", "gerencia": "DIVISIONAL NEUQUEN"}, "19537": {"nombre": "PIÑEIRO ADOLFO YAMIL", "dependencia": "OBERA-ESTACION", "gerencia": "DIVISIONAL ROSARIO"}, "19393": {"nombre": "BOSCOLO ADRIANA ELENA", "dependencia": "OLAVARRIA-OFICINA PLAN A.C.A.", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "19152": {"nombre": "RUZZO SILVIA MONICA", "dependencia": "OLIVOS-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "19154": {"nombre": "CHIESA ANDRES CARLOS", "dependencia": "OLIVOS-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "19201": {"nombre": "FERREIRA ROBERTO", "dependencia": "OLIVOS-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "19641": {"nombre": "CANOSSA HERNAN RICARDO", "dependencia": "OLIVOS-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "17632": {"nombre": "DEL PUP MARIO DONATO", "dependencia": "ONCE-OFICINA", "gerencia": "DIVISIONAL CAP Y GBA"}, "19667": {"nombre": "VILLALBA PAOLA ESCOLASTICA", "dependencia": "ONCE-OFICINA", "gerencia": "DIVISIONAL CAP Y GBA"}, "19204": {"nombre": "CABIAGLIA GABRIEL EMILIO", "dependencia": "PALERMO-CENTRO SERVICIAL", "gerencia": "DIVISIONAL CAP Y GBA"}, "19329": {"nombre": "ZANI MARIANA LAURA", "dependencia": "PALERMO-CENTRO SERVICIAL", "gerencia": "DIVISIONAL CAP Y GBA"}, "19524": {"nombre": "FAMA JORGE DANIEL", "dependencia": "PALERMO-CENTRO SERVICIAL", "gerencia": "DIVISIONAL CAP Y GBA"}, "19686": {"nombre": "ALVAREZ SCASSO MARIANA ELISA", "dependencia": "PALERMO-CENTRO SERVICIAL", "gerencia": "DIVISIONAL CAP Y GBA"}, "42769": {"nombre": "D'AGOSTINO MARTIN ARIEL", "dependencia": "PALERMO-CENTRO SERVICIAL", "gerencia": "DIVISIONAL CAP Y GBA"}, "41728": {"nombre": "SENISE LISANDRO PABLO", "dependencia": "PARANA-ESTACION", "gerencia": "DIVISIONAL ROSARIO"}, "42627": {"nombre": "KAMINSKY AIDA VANESA", "dependencia": "PARANA-ESTACION", "gerencia": "DIVISIONAL ROSARIO"}, "19485": {"nombre": "HERGESHEIMER MATIAS", "dependencia": "PARQUE ALMIRANTE BROWN-OFICINA", "gerencia": "DIVISIONAL CAP Y GBA"}, "42747": {"nombre": "GIROTTO MARIA NOELIA", "dependencia": "PASO DE LOS LIBRES-ESTACION", "gerencia": "DIVISIONAL ROSARIO"}, "19481": {"nombre": "BARRETO ANGELA VALERIA", "dependencia": "PILAR OFICINA", "gerencia": "DIVISIONAL CAP Y GBA"}, "42465": {"nombre": "ORTOLA LEANDRO", "dependencia": "PILAR OFICINA", "gerencia": "DIVISIONAL CAP Y GBA"}, "42471": {"nombre": "DA SILVA MIGUEL ALEJANDRO", "dependencia": "PILAR OFICINA", "gerencia": "DIVISIONAL CAP Y GBA"}, "42859": {"nombre": "LANTAÑO LUCIANA MAGALI", "dependencia": "PINAMAR - OFICINA", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "19114": {"nombre": "GUTIERREZ ADRIAN JORGE", "dependencia": "PLANIFICACIÓN DE TRÁNSITO", "gerencia": "SERVICIOS AL SOCIO Y ACANET"}, "19167": {"nombre": "MERCADAL LETICIA LAURA", "dependencia": "POSADAS-ESTACION", "gerencia": "DIVISIONAL ROSARIO"}, "42473": {"nombre": "DAGLIO GERMAN EMANUEL", "dependencia": "POSADAS-ESTACION", "gerencia": "DIVISIONAL ROSARIO"}, "42589": {"nombre": "SALOMONSOHN GERMAN MAXIMO", "dependencia": "PUERTO IGUAZU-UNIDAD SERVICIAL", "gerencia": "DIVISIONAL ROSARIO"}, "42539": {"nombre": "SANDRINI MANUEL MARIA", "dependencia": "PUNTA ALTA-OFICINA", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "42772": {"nombre": "BALDO DANA MARILEN", "dependencia": "RAFAELA-ESTACION", "gerencia": "DIVISIONAL ROSARIO"}, "42736": {"nombre": "AGUIRRE BETIANA MARA INES", "dependencia": "RECEP.Y ASIGNAC. AUX. MECANICO", "gerencia": "SERVICIOS AL SOCIO Y ACANET"}, "42722": {"nombre": "SCHOSSOVOV VANESA DANIELA", "dependencia": "RECEP.Y ASIGNAC. AUX. MECANICO", "gerencia": "SERVICIOS AL SOCIO Y ACANET"}, "42718": {"nombre": "PONCE ALBERTINI THOMAS AGUSTIN", "dependencia": "RECEP.Y ASIGNAC. AUX. MECANICO", "gerencia": "SERVICIOS AL SOCIO Y ACANET"}, "42820": {"nombre": "BENITEZ VERONICA ELIZABETH", "dependencia": "RECEP.Y ASIGNAC. AUX. MECANICO", "gerencia": "SERVICIOS AL SOCIO Y ACANET"}, "42819": {"nombre": "RAMIREZ, MARINA ANTONELLA", "dependencia": "RECEP.Y ASIGNAC. AUX. MECANICO", "gerencia": "SERVICIOS AL SOCIO Y ACANET"}, "42428": {"nombre": "FALCE NATALIA TAMARA", "dependencia": "RECEP.Y ASIGNAC. AUX. MECANICO", "gerencia": "SERVICIOS AL SOCIO Y ACANET"}, "42339": {"nombre": "DIAZ BENITEZ ROLANDO JULIAN", "dependencia": "RECEP.Y ASIGNAC. AUX. MECANICO", "gerencia": "SERVICIOS AL SOCIO Y ACANET"}, "42259": {"nombre": "JAIME MARIA LAURA", "dependencia": "RECEP.Y ASIGNAC. AUX. MECANICO", "gerencia": "SERVICIOS AL SOCIO Y ACANET"}, "42635": {"nombre": "ARATA JOHANNA MAGALI", "dependencia": "RECEP.Y ASIGNAC. AUX. MECANICO", "gerencia": "SERVICIOS AL SOCIO Y ACANET"}, "42221": {"nombre": "CARUSONE WALTER ADRIAN", "dependencia": "RECONQUISTA-ESTACION", "gerencia": "DIVISIONAL ROSARIO"}, "42522": {"nombre": "QUEREQUETA DIEGO ALEJANDRO", "dependencia": "RENOVACION LIC. DE CONDUCIR", "gerencia": "DIVISIONAL CAP Y GBA"}, "42897": {"nombre": "CARSCHENBOIM BLAYER FACUNDO NAHUEL", "dependencia": "RENOVACION LIC. DE CONDUCIR", "gerencia": "DIVISIONAL CAP Y GBA"}, "19618": {"nombre": "NAVATTA FABIO NAHUEL", "dependencia": "RENOVACION LIC. DE CONDUCIR", "gerencia": "DIVISIONAL CAP Y GBA"}, "42907": {"nombre": "MARTINEZ JEREMIAS AURELIANO", "dependencia": "RENOVACION LIC. DE CONDUCIR", "gerencia": "DIVISIONAL CAP Y GBA"}, "42903": {"nombre": "ROTGER FEDERICO IVAN", "dependencia": "RENOVACION LIC. DE CONDUCIR", "gerencia": "DIVISIONAL CAP Y GBA"}, "42901": {"nombre": "PANZA, DANISA PAULA", "dependencia": "RENOVACION LIC. DE CONDUCIR", "gerencia": "DIVISIONAL CAP Y GBA"}, "42424": {"nombre": "SILVA MEZA MARIA DE LAS MERCEDES", "dependencia": "RESISTENCIA-ESTACION", "gerencia": "DIVISIONAL ROSARIO"}, "19614": {"nombre": "CHILO RODOLFO NICOLAS", "dependencia": "RIO CUARTO-ESTACION", "gerencia": "DIVISIONAL CORDOBA"}, "42855": {"nombre": "GHIO ROMINA BELEN", "dependencia": "RIO CUARTO-ESTACION", "gerencia": "DIVISIONAL CORDOBA"}, "42500": {"nombre": "ARRAZOLA JOSE MARIA", "dependencia": "RIO GALLEGOS-ESTACION", "gerencia": "DIVISIONAL TRELEW"}, "17989": {"nombre": "LEIVA LUIS ALBERTO", "dependencia": "RIO GRANDE-OFICINA", "gerencia": "DIVISIONAL TRELEW"}, "19385": {"nombre": "ROURA MARCELA BEATRIZ", "dependencia": "RIO TALA-CENTRO SERVICIAL", "gerencia": "DIVISIONAL CAP Y GBA"}, "41782": {"nombre": "DIAZ DIEGO MARTIN", "dependencia": "RIO TALA-CENTRO SERVICIAL", "gerencia": "DIVISIONAL CAP Y GBA"}, "42696": {"nombre": "GALIANO SILVIA MARISEL", "dependencia": "ROQUE SAENZ PEÑA-ESTACION", "gerencia": "DIVISIONAL ROSARIO"}, "41875": {"nombre": "TORRES GABRIELA SOLEDAD", "dependencia": "ROSARIO DE LA FRONTERA-ESTAC.", "gerencia": "DIVISIONAL TUCUMAN"}, "19269": {"nombre": "CARRANZA HERNAN MARTIN", "dependencia": "ROSARIO-ESTACION", "gerencia": "DIVISIONAL ROSARIO"}, "19378": {"nombre": "AGUILAR ANDREA CAROLINA", "dependencia": "ROSARIO-ESTACION", "gerencia": "DIVISIONAL ROSARIO"}, "42672": {"nombre": "DIBENEDETTO ARIEL GERARDO", "dependencia": "ROSARIO-ESTACION", "gerencia": "DIVISIONAL ROSARIO"}, "42882": {"nombre": "BLOISE JULIETA", "dependencia": "ROSARIO-ESTACION", "gerencia": "DIVISIONAL ROSARIO"}, "42391": {"nombre": "ALBORNOZ MARIA FLORENCIA", "dependencia": "SALTA-ESTACION", "gerencia": "DIVISIONAL TUCUMAN"}, "42626": {"nombre": "HERRANDO MARCOS JESUS", "dependencia": "SALTA-ESTACION", "gerencia": "DIVISIONAL TUCUMAN"}, "42830": {"nombre": "ARUANI JUAN FRANCISCO", "dependencia": "SALTA-ESTACION", "gerencia": "DIVISIONAL TUCUMAN"}, "19185": {"nombre": "ALVARADO FERNANDO", "dependencia": "SAN CARLOS DE BARILOCHE-ESTAC.", "gerencia": "DIVISIONAL NEUQUEN"}, "19673": {"nombre": "ACOSTA ANDREA ROXANA", "dependencia": "SAN CARLOS DE BARILOCHE-ESTAC.", "gerencia": "DIVISIONAL NEUQUEN"}, "42327": {"nombre": "AYALA ROJOS LUIS LISANDRO", "dependencia": "SAN FRANCISCO-PTO.DE ABASTEC.", "gerencia": "DIVISIONAL CORDOBA"}, "41765": {"nombre": "PIÑEIRO GONZALO HERNAN", "dependencia": "SAN JUAN-CENTRO SERVICIAL", "gerencia": "DIVISIONAL CORDOBA"}, "42569": {"nombre": "MERLO BESSO FRANCO CESAR", "dependencia": "SAN JUAN-CENTRO SERVICIAL", "gerencia": "DIVISIONAL CORDOBA"}, "41846": {"nombre": "ORTEGA NAVAS JORGE MAXIMILIANO", "dependencia": "SAN JUAN-ESTACION", "gerencia": "DIVISIONAL CORDOBA"}, "19135": {"nombre": "DEL PAPA OMAR DARIO", "dependencia": "SAN LUIS-ESTACION", "gerencia": "DIVISIONAL CORDOBA"}, "42766": {"nombre": "ROMERO JESICA DENIS", "dependencia": "SAN LUIS-ESTACION", "gerencia": "DIVISIONAL CORDOBA"}, "42748": {"nombre": "GARCIA MALENA", "dependencia": "SAN MARTIN DE LOS ANDES-ESTAC.", "gerencia": "DIVISIONAL NEUQUEN"}, "42622": {"nombre": "BULACIO LANZA ENZO MATIAS", "dependencia": "SAN MIGUEL DE TUCUMAN-C.SERVIC", "gerencia": "DIVISIONAL TUCUMAN"}, "42767": {"nombre": "RAMIREZ MARIA ELISA", "dependencia": "SAN MIGUEL DE TUCUMAN-C.SERVIC", "gerencia": "DIVISIONAL TUCUMAN"}, "42707": {"nombre": "DIAZ GANIN ANA LUCIA", "dependencia": "SAN MIGUEL DE TUCUMAN-ESTACION", "gerencia": "DIVISIONAL TUCUMAN"}, "42744": {"nombre": "CAMPOS SILVIA MERCEDES", "dependencia": "SAN MIGUEL DE TUCUMAN-ESTACION", "gerencia": "DIVISIONAL TUCUMAN"}, "42862": {"nombre": "HERRERA PAMELA GUADALUPE", "dependencia": "SAN MIGUEL DE TUCUMAN-ESTACION", "gerencia": "DIVISIONAL TUCUMAN"}, "19550": {"nombre": "MATIONDAKIO PABLO GASTON", "dependencia": "SAN NICOLAS-CAMINERA", "gerencia": "DIVISIONAL CAP Y GBA"}, "42628": {"nombre": "OYOLA JORGE LUIS", "dependencia": "SAN RAFAEL-ESTACION", "gerencia": "DIVISIONAL CORDOBA"}, "42677": {"nombre": "MORALES PALACIOS GABRIELA SOLEDAD", "dependencia": "SAN SALVADOR DE JUJUY-ESTACION", "gerencia": "DIVISIONAL TUCUMAN"}, "42701": {"nombre": "GUTIERREZ ARTURO DANIEL", "dependencia": "SAN SALVADOR DE JUJUY-ESTACION", "gerencia": "DIVISIONAL TUCUMAN"}, "19404": {"nombre": "DOS SANTOS FERNANDO RAUL", "dependencia": "SANTA FE-ESTACION", "gerencia": "DIVISIONAL ROSARIO"}, "42730": {"nombre": "MAZZA MATIAS GASTON", "dependencia": "SANTA FE-ESTACION", "gerencia": "DIVISIONAL ROSARIO"}, "42304": {"nombre": "LUFRIU GERMAN LUCAS", "dependencia": "SANTA ROSA-ESTACION", "gerencia": "DIVISIONAL NEUQUEN"}, "41857": {"nombre": "GONZALEZ CLAUDIO ROBERTO", "dependencia": "SANTIAGO DEL ESTERO-ESTACION", "gerencia": "DIVISIONAL CORDOBA"}, "42521": {"nombre": "LEDESMA SABRINA MARIANELA", "dependencia": "SANTIAGO DEL ESTERO-ESTACION", "gerencia": "DIVISIONAL CORDOBA"}, "19402": {"nombre": "CAMPETTI DANILO JESUS", "dependencia": "SANTIAGO MONTENEGRO - C.S.", "gerencia": "DIVISIONAL ROSARIO"}, "19407": {"nombre": "GEREZ DIEGO GERMAN", "dependencia": "SANTIAGO MONTENEGRO - C.S.", "gerencia": "DIVISIONAL ROSARIO"}, "42195": {"nombre": "DOTTA PABLO ALBERTO", "dependencia": "SANTIAGO MONTENEGRO - C.S.", "gerencia": "DIVISIONAL ROSARIO"}, "42474": {"nombre": "MINNI FERNANDO EZEQUIEL", "dependencia": "SANTIAGO MONTENEGRO - C.S.", "gerencia": "DIVISIONAL ROSARIO"}, "17577": {"nombre": "LAVIA NORBERTO", "dependencia": "SEDE CENTRAL-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "19126": {"nombre": "RETAMAR RODAS JUAN CARLOS", "dependencia": "SEDE CENTRAL-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "19129": {"nombre": "POLO MARCOS HUMBERTO", "dependencia": "SEDE CENTRAL-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "19141": {"nombre": "RUALES ROJAS VICTOR", "dependencia": "SEDE CENTRAL-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "19320": {"nombre": "ROJAS RUBEN MARINO", "dependencia": "SEDE CENTRAL-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "19445": {"nombre": "BOGARIN DIEGO SEBASTIAN", "dependencia": "SEDE CENTRAL-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "19676": {"nombre": "HERRERA HUMBERTO RENE", "dependencia": "SEDE CENTRAL-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "19695": {"nombre": "GUACHALLA RAUL GABRIEL ROQUE", "dependencia": "SEDE CENTRAL-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "41881": {"nombre": "PORRECA YESICA NOEMI", "dependencia": "SEDE CENTRAL-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "42048": {"nombre": "GONZALEZ CARLOS ADRIAN GUILLERMO", "dependencia": "SEDE CENTRAL-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "42093": {"nombre": "SEJAS CARDOZO DANIEL", "dependencia": "SEDE CENTRAL-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "42186": {"nombre": "DIAZ DARDO DANIEL ALEJANDRO", "dependencia": "SEDE CENTRAL-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "42230": {"nombre": "FLORES CRISTIAN GABRIEL", "dependencia": "SEDE CENTRAL-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "42326": {"nombre": "MENDOZA LUCAS GABRIEL", "dependencia": "SEDE CENTRAL-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "42419": {"nombre": "MEDER MAURO HERNAN", "dependencia": "SEDE CENTRAL-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "42679": {"nombre": "MANSILLA DANIEL NICOLAS", "dependencia": "SEDE CENTRAL-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "42734": {"nombre": "LOPEZ OVIEDO JUAN MIGUEL", "dependencia": "SEDE CENTRAL-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "42698": {"nombre": "AGUILAR PAULA CORINA", "dependencia": "TANDIL-ESTACION", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "42538": {"nombre": "MARENCO PONCE DE LEON CONSTANZA FIORELA", "dependencia": "TARTAGAL-ESTACION", "gerencia": "DIVISIONAL TUCUMAN"}, "42526": {"nombre": "NOROÑA MELISA JOHANA", "dependencia": "TINOGASTA-ESTACION", "gerencia": "DIVISIONAL TUCUMAN"}, "41775": {"nombre": "CEREZO CESAR", "dependencia": "TRELEW-ESTACION", "gerencia": "DIVISIONAL TRELEW"}, "42497": {"nombre": "GUERRA NANCY VIOLETA", "dependencia": "TRELEW-ESTACION", "gerencia": "DIVISIONAL TRELEW"}, "42519": {"nombre": "ESOIN FRANCISCO NICOLAS", "dependencia": "TRELEW-ESTACION", "gerencia": "DIVISIONAL TRELEW"}, "19530": {"nombre": "IRIARTE MARIA BELEN", "dependencia": "TRES ARROYOS-ESTACION", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "19232": {"nombre": "MARTINEZ RUBEN RICARDO", "dependencia": "USHUAIA-UNIDAD SERVICIAL", "gerencia": "DIVISIONAL TRELEW"}, "21721": {"nombre": "NIEVA JORGE ROLANDO", "dependencia": "USHUAIA-UNIDAD SERVICIAL", "gerencia": "DIVISIONAL TRELEW"}, "41886": {"nombre": "SERRANO MONSERRAT FERNANDA LUCIA", "dependencia": "VELEZ SARSFIELD-OFICINA", "gerencia": "DIVISIONAL CAP Y GBA"}, "42824": {"nombre": "PARED JESICA AYELEN", "dependencia": "VENADO TUERTO-ESTACION", "gerencia": "DIVISIONAL ROSARIO"}, "42725": {"nombre": "GIANNI MARIANELLA", "dependencia": "VIEDMA-ESTACION", "gerencia": "DIVISIONAL TRELEW"}, "42858": {"nombre": "SALIVA DANIEL ADRIAN", "dependencia": "VIEDMA-ESTACION", "gerencia": "DIVISIONAL TRELEW"}, "42762": {"nombre": "MALDONADO LUCAS EXEQUIEL", "dependencia": "VILLA ALBERDI-CAMINERA", "gerencia": "DIVISIONAL TUCUMAN"}, "19278": {"nombre": "QUIROGA SILVIA LORENA", "dependencia": "VILLA CARLOS PAZ-ESTACION", "gerencia": "DIVISIONAL CORDOBA"}, "19613": {"nombre": "PEREYRA SANTIAGO IGNACIO", "dependencia": "VILLA CARLOS PAZ-ESTACION", "gerencia": "DIVISIONAL CORDOBA"}, "41816": {"nombre": "FLORES DIEGO ONOFRE", "dependencia": "VILLA DEL DIQUE-CAMINERA", "gerencia": "DIVISIONAL CORDOBA"}, "19248": {"nombre": "SACCHER GRACIELA DOLORES", "dependencia": "VILLA DEVOTO-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "19419": {"nombre": "BERON DIAZ VANESA", "dependencia": "VILLA DEVOTO-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "19443": {"nombre": "SACCHI GUSTAVO ADOLFO", "dependencia": "VILLA DEVOTO-ESTACION", "gerencia": "DIVISIONAL CAP Y GBA"}, "19397": {"nombre": "SZOTT IRENE SUSANA", "dependencia": "VILLA GESELL-ESTACION", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "19608": {"nombre": "BLENGINI VERA JUAN MANUEL", "dependencia": "VILLA GESELL-ESTACION", "gerencia": "DIVISIONAL MAR DEL PLATA"}, "42787": {"nombre": "CARIAGA ELIANA EMILSE", "dependencia": "VILLA LA ANGOSTURA-ESTACION", "gerencia": "DIVISIONAL NEUQUEN"}, "19662": {"nombre": "CROSETTO ESTEBAN GERMAN", "dependencia": "VILLA MARIA-ESTACION", "gerencia": "DIVISIONAL CORDOBA"}, "41850": {"nombre": "SUAREZ JOAQUIN NICOLAS", "dependencia": "VILLA MARIA-ESTACION", "gerencia": "DIVISIONAL CORDOBA"}, "42869": {"nombre": "BOIGUES LIMA CRISTIAN ELIAS", "dependencia": "VILLA MERCEDES-ESTACION", "gerencia": "DIVISIONAL CORDOBA"}, "42385": {"nombre": "BAEZ NATALI VERONICA", "dependencia": "VILLA OJO DE AGUA-CAMINERA", "gerencia": "DIVISIONAL CORDOBA"}, "19231": {"nombre": "ISASTI DIEGO MARTIN", "dependencia": "ZAPALA-ESTACION", "gerencia": "DIVISIONAL NEUQUEN"}, "42752": {"nombre": "BAZALAR VELAZCO ELIZABETH KELLY", "dependencia": "ZAPALA-ESTACION", "gerencia": "DIVISIONAL NEUQUEN"}, "42495": {"nombre": "ALBORNOZ FRANCISCO GABRIEL", "dependencia": "ZARATE-OFICINA PLAN A.C.A.", "gerencia": "DIVISIONAL CAP Y GBA"}, "19144": {"nombre": "COMESAÑA VICTORIA LORENA", "dependencia": "", "gerencia": ""}, "42433": {"nombre": "SENA ESTEFANIA ESTHER", "dependencia": "", "gerencia": ""}, "42732": {"nombre": "GARIBALDI MATIAS EMANUEL", "dependencia": "", "gerencia": ""}, "42821": {"nombre": "BORLENGHI CORONEL FIORELLA JACQUELINE", "dependencia": "ESCUELA DE CONDUCCIÓN", "gerencia": "DIVISIONAL CAP Y GBA"}, "41901": {"nombre": "GOMEZ MARIA DE LOS ANGELES", "dependencia": "COBRANZAS SOCIOS-SEDE CENTRAL", "gerencia": "DIVISIONAL CAP Y GBA"}, "42890": {"nombre": "LUNA FRANCISCO ANIBAL", "dependencia": "MATERIAL RODANTE AUX. MECANICO", "gerencia": "DIVISIONAL CAP Y GBA"}, "42127": {"nombre": "TORRA ROCIO INES", "dependencia": "MATERIAL RODANTE AUX. MECANICO", "gerencia": "DIVISIONAL CAP Y GBA"}, "19678": {"nombre": "CICCHETTI MATIAS MIGUEL", "dependencia": "ROSARIO-ESTACION", "gerencia": "DIVISIONAL ROSARIO"}};
+const PASS = "ACA2024";
+const SH = true;
+let CU = null, ALL = [];
+
+// answers: mod -> [q1correct, q2correct, ...]
+const ANS = {
+  1: ['b','c','b','b','c'],
+  2: ['b','b','c','c','c'],
+  3: ['b','c','b','b','c'],
+  4: ['c','b','b','c','c'],
+  5: ['b','c','b','b','b']
+};
+const EXPLAIN = {
+  1: [
+    'Correcto. Pérez López define la calidad motivacional por la sensibilidad hacia los motivos trascendentes.',
+    'Correcto. La motivación extrínseca se basa en recompensas externas y en evitar consecuencias negativas.',
+    'Correcto. Aprender y sentirse capaz es la característica central de la motivación intrínseca.',
+    'Correcto. Al depender de recompensas externas, desaparece cuando esas recompensas se eliminan.',
+    'Correcto. Los tres tipos conviven siempre; lo que varía es cuál predomina en cada persona.'
+  ],
+  2: [
+    'Correcto. Pérez López usa el concepto de "unidad" para describir la coherencia que genera la motivación trascendente.',
+    'Correcto. No depende de recompensas ni del interés de la tarea; viene de la convicción de que impacta en otros.',
+    'Correcto. Al integrarse los tres tipos surge el verdadero espíritu de equipo y un clima positivo sostenido.',
+    'Correcto. El médico actúa por el impacto positivo que genera en la vida de sus pacientes.',
+    'Correcto. Los tres encuentran energía sostenida en el impacto que generan en otras personas.'
+  ],
+  3: [
+    'Correcto. La motivación trascendente nace de los valores internos, no de factores externos.',
+    'Correcto. El propósito del ACA es estar cuando alguien más lo necesita, lo que es naturalmente trascendente.',
+    'Correcto. La cadena de impacto es la secuencia de consecuencias que tiene una tarea en personas reales.',
+    'Correcto. Al nacer de valores internos, no puede imponerse desde afuera; debe cultivarse desde adentro.',
+    'Correcto. El impacto final es que una familia varada recupera la seguridad y el socio recupera la confianza.'
+  ],
+  4: [
+    'Correcto. Lo que distingue a un líder es qué tipo de motivos activa en quienes lo rodean.',
+    'Correcto. La señal de liderazgo transaccional es que el equipo no funciona cuando el líder no está.',
+    'Correcto. El liderazgo transformador puede volverse manipulación si prioriza resultados sobre el desarrollo genuino.',
+    'Correcto. Desarrollar sin retener es un comportamiento característico del liderazgo trascendental.',
+    'Correcto. El liderazgo trascendental está disponible para cualquier persona, sin importar su posición.'
+  ],
+  5: [
+    'Correcto. Es una cultura que se construye con pequeñas acciones cotidianas y constantes.',
+    'Correcto. Reforzar excesivamente la motivación extrínseca debilita la trascendente y el espacio para actuar por convicción.',
+    'Correcto. Lo que se reconoce tiende a repetirse y así se refuerza la cultura del equipo.',
+    'Correcto. La incoherencia entre valores declarados y acciones reales destruye rápidamente la motivación trascendente.',
+    'Correcto. Aumentar controles y sanciones refuerza la motivación extrínseca y debilita la trascendente.'
+  ]
+};
+
+// Storage
+async function sGet(k){try{return await window.storage.get(k,SH);}catch(e){return null;}}
+async function sSet(k,v){try{return await window.storage.set(k,JSON.stringify(v),SH);}catch(e){return null;}}
+
+// Screens
+function goScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>{s.classList.remove('active');s.style.display='none';});
+  const el=document.getElementById(id);
+  el.style.removeProperty('display');
+  el.classList.add('active');
+  if(id==='s-login'){
+    sessionStorage.removeItem('aca_session');
+    CU=null;
+    document.getElementById('imat').value='';
+    document.getElementById('prev').style.display='none';
+    document.getElementById('nf').style.display='none';
+    document.getElementById('lerr').style.display='none';
+  }
+}
+function goFac(){goScreen('s-fac');document.getElementById('ipass').value='';document.getElementById('ferr').style.display='none';}
+
+function cerrarSesion(){
+  if(!confirm('¿Querés cerrar tu sesión?')) return;
+  sessionStorage.removeItem('aca_session');
+  CU = null;
+  document.getElementById('imat').value='';
+  document.getElementById('prev').style.display='none';
+  document.getElementById('nf').style.display='none';
+  document.getElementById('lerr').style.display='none';
+  // Reset panels
+  document.querySelectorAll('.panel').forEach((p,i)=>p.classList.toggle('active',i===0));
+  document.querySelectorAll('.ni').forEach((n,i)=>n.classList.toggle('active',i===0));
+  goScreen('s-login');
+}
+
+// Matricula preview
+function onMat(v){
+  const p=document.getElementById('prev'),nf=document.getElementById('nf'),e=document.getElementById('lerr');
+  e.style.display='none';
+  if(!v.trim()){p.style.display='none';nf.style.display='none';return;}
+  const s=STAFF[v.trim()];
+  if(s){
+    document.getElementById('pn').textContent=s.nombre;
+    document.getElementById('pd').textContent='📍 '+s.dependencia;
+    document.getElementById('pg').textContent='🏢 '+s.gerencia;
+    p.style.display='block';nf.style.display='none';
+  }else{p.style.display='none';nf.style.display='block';}
+}
+
+// Login
+async function doLogin(){
+  const mat=document.getElementById('imat').value.trim();
+  const e=document.getElementById('lerr');
+  if(!mat){e.textContent='Ingresá tu matrícula.';e.style.display='block';return;}
+  const s=STAFF[mat];
+  if(!s){e.textContent='Matrícula no encontrada.';e.style.display='block';return;}
+  e.style.display='none';
+  const uid='m_'+mat;
+  let u;const ex=await sGet(uid);
+  if(ex){u=JSON.parse(ex.value);}
+  else{
+    u={id:uid,mat,name:s.nombre,dep:s.dependencia,ger:s.gerencia,joined:new Date().toISOString(),mods:{},last:new Date().toISOString()};
+    await sSet(uid,u);
+    const ix=await sGet('idx');const idx=ix?JSON.parse(ix.value):[];
+    if(!idx.includes(uid)){idx.push(uid);await sSet('idx',idx);}
+  }
+  u.last=new Date().toISOString();
+  await sSet(uid,u);
+  CU=u;
+  sessionStorage.setItem('aca_session', uid);
+  // Load progress from Sheets then init
+  loadProgressFromSheets(mat, ex);
+}
+
+function loadProgressFromSheets(mat, isReturning) {
+  const cbName = 'cb_prog_' + Date.now();
+  window[cbName] = async function(data) {
+    delete window[cbName];
+    const s = document.getElementById('sc_' + cbName);
+    if(s) s.remove();
+    if(data && data.mods && Object.keys(data.mods).length > 0) {
+      CU.mods = {};
+      for(const m in data.mods) {
+        CU.mods[parseInt(m)] = data.mods[m];
+      }
+      await sSet(CU.id, CU);
+    }
+    if(!isReturning) {
+      sendToSheets('ingreso', null, null, true);
+    }
+    initCourse();
+    goScreen('s-course');
+
+  };
+  const url = SHEETS_URL + '?callback=' + cbName + '&action=getProgress&matricula=' + encodeURIComponent(mat);
+  const script = document.createElement('script');
+  script.id = 'sc_' + cbName;
+  script.src = url;
+  script.onerror = async function() {
+    delete window[cbName];
+    if(!isReturning) sendToSheets('ingreso', null, null, true);
+    initCourse();
+    goScreen('s-course');
+  };
+  document.body.appendChild(script);
+}
+
+function initCourse(){
+  document.getElementById('uav').textContent=CU.name.charAt(0);
+  document.getElementById('un').textContent=CU.name;
+  document.getElementById('ud').textContent=CU.dep;
+  document.getElementById('ug').textContent=CU.ger;
+  updateProg();restoreState();
+}
+
+// Nav
+function goP(i){
+  document.querySelectorAll('.panel').forEach((p,j)=>p.classList.toggle('active',j===i));
+  document.querySelectorAll('.ni').forEach((n,j)=>n.classList.toggle('active',j===i));
+  // handle results nav item separately
+  const nres = document.getElementById('n-res');
+  if(nres) nres.classList.toggle('active', i===6);
+  window.scrollTo(0,0);
+  document.getElementById('sb').classList.remove('open');
+  if(i===6) renderResultados();
+}
+function togSB(){document.getElementById('sb').classList.toggle('open');}
+
+function updateProg(){
+  const done=Object.keys(CU.mods||{}).length;
+  const pct=Math.round(done/5*100);
+  document.getElementById('pbf').style.width=pct+'%';
+  document.getElementById('ppct').textContent=done+' / 5 módulos';
+  document.getElementById('tbf').style.width=pct+'%';
+  for(let m=1;m<=5;m++) if(CU.mods[m]) markNav(m);
+}
+function markNav(m){
+  const n=document.getElementById('n'+m);
+  if(n){n.classList.add('done');n.querySelector('.nn').textContent='✓';}
+}
+
+// QUIZ
+function submitQuiz(mod){
+  const correct=ANS[mod];
+  const explain=EXPLAIN[mod];
+  let score=0;
+  for(let q=1;q<=5;q++){
+    const sel=document.querySelector(`input[name="q${mod>1?mod+'_':''}${q}"]:checked`);
+    const fb=document.getElementById(`f${mod}q${q}`);
+    const opts=document.querySelectorAll(`input[name="q${mod>1?mod+'_':''}${q}"]`);
+    opts.forEach(o=>{
+      const lbl=o.closest('.opt');
+      lbl.classList.add('disabled');
+      if(o.value===correct[q-1]) lbl.classList.add(sel&&sel.value===correct[q-1]?'correct':'missed');
+      if(sel&&o.value===sel.value&&sel.value!==correct[q-1]) lbl.classList.add('wrong');
+    });
+    const ok=sel&&sel.value===correct[q-1];
+    if(ok) score++;
+    fb.style.display='block';
+    fb.className='q-feedback '+(ok?'ok':'fail');
+    fb.textContent=ok?('✓ '+explain[q-1]):('✗ La respuesta correcta era la opción "'+(correct[q-1]).toUpperCase()+'". '+explain[q-1]);
+  }
+  const pct=Math.round(score/5*100);
+  const pass=pct>=60;
+  const sc=document.getElementById('sc'+mod);
+  sc.style.display='block';
+  sc.className='score-box '+(pass?'pass':'fail');
+  sc.innerHTML=`<div class="sn">${score}/5</div><p>${pass?'✓ Aprobado ('+pct+'%) — podés continuar.':'✗ '+pct+'% — revisá el contenido e intentá de nuevo.'}</p>`;
+  document.getElementById('qs'+mod).disabled=true;
+  if(pass){
+    document.getElementById('refl'+mod).style.display='block';
+    document.getElementById('cb'+mod).classList.add('show');
+    if(!CU.mods[mod]) CU.mods[mod]={quizScore:pct,passed:true};
+    else{CU.mods[mod].quizScore=pct;CU.mods[mod].passed=true;}
+  } else {
+    setTimeout(()=>{
+      document.getElementById('qs'+mod).disabled=false;
+      document.getElementById('qs'+mod).textContent='Intentar de nuevo';
+      // reset
+      for(let q=1;q<=5;q++){
+        const opts=document.querySelectorAll(`input[name="q${mod>1?mod+'_':''}${q}"]`);
+        opts.forEach(o=>{const l=o.closest('.opt');l.classList.remove('disabled','correct','wrong','missed');});
+        document.getElementById(`f${mod}q${q}`).style.display='none';
+      }
+      sc.style.display='none';
+    },4000);
+  }
+}
+
+async function completeModule(mod){
+  const refl=document.getElementById('rt'+mod);
+  if(!CU.mods[mod]) CU.mods[mod]={};
+  CU.mods[mod].reflection=refl?refl.value.trim():'';
+  CU.mods[mod].completedAt=new Date().toISOString();
+  CU.last=new Date().toISOString();
+  await sSet(CU.id,CU);
+
+  // Send to Google Sheets
+  await sendToSheets(mod, CU.mods[mod].quizScore, CU.mods[mod].reflection);
+
+  const ok=document.getElementById('ok'+mod);
+  ok.textContent='✓ Módulo guardado correctamente';
+  ok.style.display='block';
+  document.getElementById('cb'+mod).classList.remove('show');
+  markNav(mod);updateProg();
+  if(mod===5){
+    document.getElementById('cert5').style.display='block';
+    showResultadoFinal();
+  }
+  else{setTimeout(()=>goP(mod),800);}
+}
+
+function restoreState(){
+  for(let m=1;m<=5;m++){
+    if(!CU.mods[m]) continue;
+
+    // Tilde en el menú lateral
+    markNav(m);
+
+    // Mensaje de completado dentro del módulo
+    const ok=document.getElementById('ok'+m);
+    if(ok){ok.textContent='✓ Módulo completado';ok.style.display='block';}
+
+    // Restaurar reflexión escrita
+    const refl=document.getElementById('rt'+m);
+    if(refl&&CU.mods[m].reflection) refl.value=CU.mods[m].reflection;
+
+    // Mostrar reflexión y ocultar botón completar (ya fue completado)
+    const reflBox=document.getElementById('refl'+m);
+    if(reflBox) reflBox.style.display='block';
+    const cb=document.getElementById('cb'+m);
+    if(cb) cb.classList.remove('show');
+
+    // Mostrar score del quiz si existe
+    if(CU.mods[m].quizScore!==undefined){
+      const sc=document.getElementById('sc'+m);
+      if(sc){
+        sc.style.display='block';
+        sc.className='score-box pass';
+        sc.innerHTML=`<div class="sn">✓</div><p>Quiz aprobado con ${CU.mods[m].quizScore}% — módulo completado.</p>`;
+      }
+      // Deshabilitar el botón de quiz
+      const qs=document.getElementById('qs'+m);
+      if(qs) qs.disabled=true;
+    }
+
+    // Certificado en módulo 5
+    if(m===5&&Object.keys(CU.mods).length===5){
+      const cert=document.getElementById('cert5');
+      if(cert) cert.style.display='block';
+      setTimeout(()=>showResultadoFinal(), 500);
+    }
+  }
+}
+
+// On page load: only auto-resume if there's an active browser session
+window.addEventListener('load', async ()=>{
+  const sid = sessionStorage.getItem('aca_session');
+  if(sid){
+    const ex = await sGet(sid);
+    if(ex){
+      CU = JSON.parse(ex.value);
+      initCourse();
+      goScreen('s-course');
+    }
+  }
+});
+
+// Facilitator
+function doFacLogin(){
+  const p=document.getElementById('ipass').value;
+  const e=document.getElementById('ferr');
+  if(p!==PASS){e.textContent='Clave incorrecta.';e.style.display='block';return;}
+  e.style.display='none';
+  sessionStorage.removeItem('aca_session');
+  goScreen('s-dash');loadDash();
+}
+
+async function loadDash(){
+  document.getElementById('tbl').innerHTML='<div class="empty">Cargando desde Google Sheets...</div>';
+  const cbName = 'cb_dash_' + Date.now();
+  window[cbName] = function(data) {
+    delete window[cbName];
+    const s = document.getElementById('sc_' + cbName);
+    if(s) s.remove();
+    if(data && Array.isArray(data)) {
+      ALL = data;
+      renderDash(data);
+    } else {
+      document.getElementById('tbl').innerHTML='<div class="empty">No se pudo cargar. Intentá de nuevo.</div>';
+    }
+  };
+  const url = SHEETS_URL + '?callback=' + cbName + '&action=getAllParticipants';
+  const script = document.createElement('script');
+  script.id = 'sc_' + cbName;
+  script.src = url;
+  script.onerror = function() {
+    delete window[cbName];
+    document.getElementById('tbl').innerHTML='<div class="empty">Error al conectar con Google Sheets.</div>';
+  };
+  document.body.appendChild(script);
+}
+
+function renderDash(ps){
+  document.getElementById('st1').textContent=ps.length;
+  document.getElementById('st2').textContent=ps.filter(p=>Object.keys(p.mods||{}).length===5).length;
+  document.getElementById('st3').textContent=ps.length?(ps.reduce((s,p)=>s+Object.keys(p.mods||{}).length,0)/ps.length).toFixed(1):0;
+  document.getElementById('st4').textContent=new Set(ps.map(p=>p.ger).filter(Boolean)).size;
+  if(!ps.length){document.getElementById('tbl').innerHTML='<div class="empty">Sin participantes aún.</div>';return;}
+  const rows=ps.map(p=>{
+    const mods=p.mods||{};
+    const done=Object.keys(mods).length;
+    const st=done===5?'<span class="bdg bdg-g">Completo</span>':done>0?'<span class="bdg bdg-y">En progreso</span>':'<span class="bdg bdg-x">Sin iniciar</span>';
+    const dots=[1,2,3,4,5].map(m=>{
+      const sc=mods[m]?.quizScore;
+      return `<div class="dot ${mods[m]?'done':''}" title="${sc?sc+'%':''}">${m}</div>`;
+    }).join('');
+    const last=p.last?new Date(p.last).toLocaleDateString('es-AR'):'—';
+    return `<tr><td>${p.mat||'—'}</td><td><strong>${p.name}</strong></td><td>${p.dep||'—'}</td><td>${p.ger||'—'}</td><td><div class="dots">${dots}</div></td><td>${done}/5</td><td>${st}</td><td>${last}</td><td><button class="vbtn" onclick="showDet('${p.id}')">Ver</button></td></tr>`;
+  }).join('');
+  document.getElementById('tbl').innerHTML=`<table><thead><tr><th>Matrícula</th><th>Nombre</th><th>Dependencia</th><th>Gerencia</th><th>Módulos</th><th>Avance</th><th>Estado</th><th>Último acceso</th><th></th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+function filterTbl(q){
+  const f=ALL.filter(p=>(p.name||'').toLowerCase().includes(q.toLowerCase())||(p.dep||'').toLowerCase().includes(q.toLowerCase())||(p.ger||'').toLowerCase().includes(q.toLowerCase())||(p.mat||'').includes(q));
+  renderDash(f);
+}
+
+function showDet(uid){
+  const p=ALL.find(x=>x.id===uid);if(!p) return;
+  const mods=p.mods||{};
+  const mn=['','Los tres motores','La fuerza trascendente','Valores y propósito','Liderazgo trascendental','El equipo trascendente'];
+  let h=`<div class="mod-s"><h3>Datos</h3><p><strong>Matrícula:</strong> ${p.mat}</p><p><strong>Nombre:</strong> ${p.name}</p><p><strong>Dependencia:</strong> ${p.dep}</p><p><strong>Gerencia:</strong> ${p.ger}</p><p><strong>Ingresó:</strong> ${new Date(p.joined).toLocaleDateString('es-AR')}</p></div>`;
+  for(let m=1;m<=5;m++){
+    h+=`<div class="mod-s"><h3>Módulo ${m} — ${mn[m]}</h3>`;
+    if(!mods[m]){h+='<p style="font-size:.8rem;color:#aaa;font-style:italic">No completado</p>';}
+    else{
+      const sc=mods[m].quizScore;
+      h+=`<p class="mod-sc ${sc>=60?'p':'f'}">${sc>=60?'✓':'✗'} Quiz: ${sc}%</p>`;
+      if(mods[m].reflection){h+=`<div class="mod-a" style="margin-top:8px"><div class="mq">Reflexión</div><div class="ma">${mods[m].reflection}</div></div>`;}
+      h+=`<p style="font-size:.7rem;color:#aaa;margin-top:6px">Completado: ${new Date(mods[m].completedAt).toLocaleString('es-AR')}</p>`;
+    }
+    h+='</div>';
+  }
+  document.getElementById('mod-t').textContent=p.name+' · '+p.mat;
+  document.getElementById('mod-b').innerHTML=h;
+  document.getElementById('ov').classList.add('open');
+}
+function closeMod(){document.getElementById('ov').classList.remove('open');}
+
+// ── GOOGLE SHEETS INTEGRATION ──
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxonVOwnlhF2upDGA08pL-0_9NAYZ-cW0nI-FvvOkdZrbG9lNj9mPkF_2spXJ46FHLh/exec';
+
+function sendToSheets(modulo, quizScore, reflexion, esIngreso){
+  try {
+    const payload = {
+      tipo: esIngreso ? 'ingreso' : 'modulo',
+      matricula: CU.mat || '',
+      nombre: CU.name || '',
+      dependencia: CU.dep || '',
+      gerencia: CU.ger || '',
+      modulo: modulo,
+      quizScore: quizScore || '',
+      reflexion: reflexion || ''
+    };
+    // JSONP — evita bloqueo CORS
+    const cbName = 'cb_' + Date.now();
+    window[cbName] = function(r){ delete window[cbName]; const s=document.getElementById('sc_'+cbName); if(s) s.remove(); };
+    const encoded = encodeURIComponent(JSON.stringify(payload));
+    const url = SHEETS_URL + '?callback=' + cbName + '&data=' + encoded;
+    const script = document.createElement('script');
+    script.id = 'sc_' + cbName;
+    script.src = url;
+    document.body.appendChild(script);
+  } catch(e) {
+    console.log('Sheets sync error:', e);
+  }
+}
+
+function showResultadoFinal(){
+  const mods = CU.mods || {};
+  const nombres = {1:'Los tres motores',2:'La fuerza de actuar por otros',3:'Valores y propósito',4:'Liderazgo trascendental',5:'El equipo trascendente'};
+  
+  document.getElementById('resultado-final').style.display='block';
+  document.getElementById('rf-nombre').textContent = CU.name;
+  document.getElementById('rf-info').textContent = CU.dep + ' · ' + CU.ger;
+  
+  // Promedio
+  const scores = Object.values(mods).map(m => m.quizScore || 0).filter(s => s > 0);
+  const promedio = scores.length ? Math.round(scores.reduce((a,b)=>a+b,0)/scores.length) : 0;
+  document.getElementById('rf-promedio').textContent = promedio + '%';
+  
+  // Módulos
+  let modsHtml = '';
+  for(let m=1;m<=5;m++){
+    const mod = mods[m] || {};
+    const score = mod.quizScore || 0;
+    const refl = mod.reflection || '(Sin reflexión)';
+    modsHtml += `<div style="background:#fff;border-radius:12px;padding:16px 18px;margin-bottom:12px;box-shadow:0 2px 10px rgba(0,0,0,.06);">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+        <div style="font-size:.82rem;font-weight:600;color:var(--az);">Módulo ${m} — ${nombres[m]}</div>
+        <div style="font-size:.8rem;font-weight:700;color:${score>=60?'var(--ve)':'#E53935'};">✓ ${score}%</div>
+      </div>
+      <div style="font-size:.8rem;color:var(--gr2);font-style:italic;line-height:1.6;">"${refl}"</div>
+    </div>`;
+  }
+  document.getElementById('rf-modulos').innerHTML = modsHtml;
+  
+  // Compromiso final
+  const comp = mods[5] ? (mods[5].reflection || '(Sin reflexión)') : '(Sin reflexión)';
+  document.getElementById('rf-compromiso').textContent = comp;
+  
+  // Scroll to results
+  setTimeout(()=>document.getElementById('resultado-final').scrollIntoView({behavior:'smooth'}), 300);
+}
+
+function renderResultados(){
+  const mods = CU.mods || {};
+  const nombres = {1:'Los tres motores',2:'La fuerza de actuar por otros',3:'Valores y propósito',4:'Liderazgo trascendental',5:'El equipo trascendente'};
+  const done = Object.keys(mods).length;
+  const container = document.getElementById('panel-resultados-content');
+  if(!container) return;
+
+  if(done === 0){
+    container.innerHTML = '<div class="ib az" style="text-align:center;padding:24px;"><p style="color:var(--gr2);font-size:.88rem;">Completá al menos un módulo para ver tus resultados aquí.</p></div>';
+    return;
+  }
+
+  const scores = Object.values(mods).map(m=>m.quizScore||0).filter(s=>s>0);
+  const promedio = scores.length ? Math.round(scores.reduce((a,b)=>a+b,0)/scores.length) : 0;
+
+  let html = '';
+
+  // Header card
+  html += `<div style="background:var(--az);border-radius:14px;padding:22px 24px;margin-bottom:16px;">
+    <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--do2);margin-bottom:6px;">Automóvil Club Argentino · GDN</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:#fff;">${CU.name}</div>
+    <div style="font-size:.75rem;color:rgba(255,255,255,.5);margin-top:2px;">${CU.dep} · ${CU.ger}</div>
+    <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;">
+      <div style="background:rgba(255,255,255,.08);border-radius:9px;padding:10px 14px;text-align:center;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--do2);">${promedio}%</div>
+        <div style="font-size:.65rem;color:rgba(255,255,255,.45);">Promedio</div>
+      </div>
+      <div style="background:rgba(255,255,255,.08);border-radius:9px;padding:10px 14px;text-align:center;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:${done===5?'var(--ve)':'var(--do2)'};">${done}/5</div>
+        <div style="font-size:.65rem;color:rgba(255,255,255,.45);">Módulos</div>
+      </div>
+      ${done===5?'<div style="background:rgba(26,127,90,.3);border-radius:9px;padding:10px 14px;text-align:center;"><div style="font-size:1.4rem;">🏆</div><div style="font-size:.65rem;color:rgba(255,255,255,.6);">Completado</div></div>':''}
+    </div>
+  </div>`;
+
+  // Modules detail
+  for(let m=1;m<=5;m++){
+    const mod = mods[m];
+    if(!mod){
+      html += `<div style="background:#f5f5f5;border-radius:10px;padding:14px 16px;margin-bottom:10px;opacity:.5;">
+        <div style="font-size:.8rem;font-weight:600;color:var(--gr2);">Módulo ${m} — ${nombres[m]}</div>
+        <div style="font-size:.75rem;color:#aaa;margin-top:4px;">Pendiente</div>
+      </div>`;
+    } else {
+      const score = mod.quizScore||0;
+      const refl = mod.reflection || '(Sin reflexión)';
+      html += `<div style="background:#fff;border-radius:10px;padding:16px 18px;margin-bottom:10px;box-shadow:0 2px 10px rgba(0,0,0,.06);border-left:4px solid ${score>=60?'var(--ve)':'var(--cel)'};">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+          <div style="font-size:.82rem;font-weight:600;color:var(--az);">Módulo ${m} — ${nombres[m]}</div>
+          <div style="font-size:.8rem;font-weight:700;color:${score>=60?'var(--ve)':'var(--cel)'};">✓ ${score}%</div>
+        </div>
+        <div style="font-size:.78rem;color:var(--gr2);font-style:italic;line-height:1.6;">"${refl}"</div>
+      </div>`;
+    }
+  }
+
+  // Compromiso final
+  if(mods[5] && mods[5].reflection){
+    html += `<div style="background:var(--dolt);border-radius:12px;padding:16px 18px;margin-top:4px;border-left:4px solid var(--do);">
+      <div style="font-size:.78rem;font-weight:600;color:var(--az);margin-bottom:5px;">🎯 Tu compromiso final</div>
+      <div style="font-size:.84rem;color:var(--gr);line-height:1.7;font-style:italic;">"${mods[5].reflection}"</div>
+    </div>`;
+  }
+
+  // Felicitacion
+  if(done===5){
+    html += `<div style="background:linear-gradient(135deg,var(--ve),#156B4A);border-radius:12px;padding:20px;margin-top:14px;text-align:center;">
+      <div style="font-size:1.5rem;margin-bottom:8px;">🌟</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#fff;font-weight:700;margin-bottom:6px;">¡Felicitaciones!</div>
+      <div style="font-size:.82rem;color:rgba(255,255,255,.8);line-height:1.6;">Completaste el curso de Motivación Trascendente.<br>Sos parte del equipo que elige actuar por el bien de los demás.</div>
+    </div>`;
+  }
+
+  container.innerHTML = html;
+}
+
+function exportCSV(){
+  const rows=[['Matrícula','Nombre','Dependencia','Gerencia','Módulos completados','Estado','Último acceso','M1 Quiz','M1 Reflexión','M2 Quiz','M2 Reflexión','M3 Quiz','M3 Reflexión','M4 Quiz','M4 Reflexión','M5 Quiz','M5 Reflexión']];
+  ALL.forEach(p=>{
+    const mods=p.mods||{};
+    const done=Object.keys(mods).length;
+    const st=done===5?'Completo':done>0?'En progreso':'Sin iniciar';
+    const row=[p.mat||'',p.name,p.dep||'',p.ger||'',done,st,new Date(p.last).toLocaleDateString('es-AR')];
+    for(let m=1;m<=5;m++){row.push(mods[m]?.quizScore||'');row.push((mods[m]?.reflection||'').replace(/\n/g,' '));}
+    rows.push(row);
+  });
+  const csv=rows.map(r=>r.map(c=>`"${c}"`).join(',')).join('\n');
+  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='registro_ACA.csv';a.click();
+}
+</script>
+</body>
+</html>
